@@ -1,13 +1,20 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { SoapIcon } from '@/components/icons/soap-icon';
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-background">
       <header className="flex flex-col items-center text-center mb-12 animate-in fade-in duration-1000">
-        <SoapIcon className="h-24 w-24 mb-4" />
+        <Image
+          src="https://placehold.co/96x96.png"
+          alt="Company Logo"
+          width={96}
+          height={96}
+          className="mb-4"
+          data-ai-hint="logo"
+        />
         <h1 className="text-5xl font-bold font-headline text-foreground mb-2">
           Paper Street Co.
         </h1>
