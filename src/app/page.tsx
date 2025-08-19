@@ -21,7 +21,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
           <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent-foreground">Project Mayhem</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-accent">Project Mayhem</CardTitle>
               <CardDescription>A space for the Rogue Android</CardDescription>
             </CardHeader>
             <CardContent>
@@ -33,7 +33,7 @@ export default function Home() {
 
           <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent-foreground">Space Monkeys</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-accent">Space Monkeys</CardTitle>
               <CardDescription>A space for Ground Control</CardDescription>
             </CardHeader>
             <CardContent>
@@ -45,7 +45,7 @@ export default function Home() {
 
           <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent-foreground">Lou's Basement</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-accent">Lou's Basement</CardTitle>
               <CardDescription>A space for Double D</CardDescription>
             </CardHeader>
             <CardContent>
@@ -59,7 +59,7 @@ export default function Home() {
         <div className="mt-8 w-full md:w-1/3">
            <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent-foreground">Support Groups</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-accent">Support Groups</CardTitle>
               <CardDescription>A place to let it all out.</CardDescription>
             </CardHeader>
             <CardContent>
