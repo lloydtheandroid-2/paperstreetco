@@ -13,7 +13,6 @@ export default function Home() {
           width={96}
           height={96}
           className="mb-4"
-          data-ai-hint="logo"
         />
         <h1 className="text-5xl font-bold font-headline text-foreground mb-2">
           Paper Street Co.
