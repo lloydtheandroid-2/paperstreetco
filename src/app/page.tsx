@@ -10,8 +10,8 @@ export default function Home() {
         <Image
           src="/assets/logo.png"
           alt="Company Logo"
-          width={96}
-          height={96}
+          width={192}
+          height={192}
           className="mb-4"
         />
         <h1 className="text-5xl font-bold font-headline text-foreground mb-2">
