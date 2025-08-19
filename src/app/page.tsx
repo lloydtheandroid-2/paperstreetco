@@ -26,7 +26,7 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Link href="/sandbox/android" passHref>
-                <Button className="w-full">Enter Sandbox</Button>
+                <Button className="w-full">Enter this Soapbox</Button>
               </Link>
             </CardContent>
           </Card>
@@ -38,7 +38,7 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Link href="/sandbox/ground-control" passHref>
-                <Button className="w-full">Enter Sandbox</Button>
+                <Button className="w-full">Enter this Soapbox</Button>
               </Link>
             </CardContent>
           </Card>
@@ -50,7 +50,7 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Link href="/sandbox/double-d" passHref>
-                <Button className="w-full">Enter Sandbox</Button>
+                <Button className="w-full">Enter this Soapbox</Button>
               </Link>
             </CardContent>
           </Card>
@@ -64,7 +64,7 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Link href="/sandbox/support-groups" passHref>
-                <Button className="w-full">Enter Sandbox</Button>
+                <Button className="w-full">Enter this Soapbox</Button>
               </Link>
             </CardContent>
           </Card>
