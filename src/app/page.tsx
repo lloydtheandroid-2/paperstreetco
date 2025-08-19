@@ -8,7 +8,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-background">
       <header className="flex flex-col items-center text-center mb-12 animate-in fade-in duration-1000">
         <Image
-          src="https://placehold.co/96x96.png"
+          src="/assets/logo.png"
           alt="Company Logo"
           width={96}
           height={96}
