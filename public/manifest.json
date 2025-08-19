@@ -1,0 +1,22 @@
+{
+  "name": "Paper Street Soapbox",
+  "short_name": "Soapbox",
+  "description": "A sandbox PWA to build and test simple web applications.",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#001F3F",
+  "theme_color": "#008080"
+}
