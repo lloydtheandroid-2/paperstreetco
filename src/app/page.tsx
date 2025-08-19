@@ -31,7 +31,7 @@ export default function Home() {
               <CardDescription>A space for the Rogue Android</CardDescription>
             </CardHeader>
             <CardContent>
-              <Link href="/sandbox/android" passHref>
+              <Link href="/portfolio/project-mayhem" passHref>
                 <Button className="w-full">Enter this Soapbox</Button>
               </Link>
             </CardContent>
@@ -43,7 +43,7 @@ export default function Home() {
               <CardDescription>A space for Ground Control</CardDescription>
             </CardHeader>
             <CardContent>
-              <Link href="/sandbox/ground-control" passHref>
+              <Link href="/portfolio/space-monkeys" passHref>
                 <Button className="w-full">Enter this Soapbox</Button>
               </Link>
             </CardContent>
@@ -55,7 +55,7 @@ export default function Home() {
               <CardDescription>A space for Double D</CardDescription>
             </CardHeader>
             <CardContent>
-              <Link href="/sandbox/double-d" passHref>
+              <Link href="/portfolio/lous-basement" passHref>
                 <Button className="w-full">Enter this Soapbox</Button>
               </Link>
             </CardContent>
@@ -69,7 +69,7 @@ export default function Home() {
               <CardDescription>A place to let it all out.</CardDescription>
             </CardHeader>
             <CardContent>
-              <Link href="/sandbox/support-groups" passHref>
+              <Link href="/blog" passHref>
                 <Button className="w-full">Enter this Soapbox</Button>
               </Link>
             </CardContent>
