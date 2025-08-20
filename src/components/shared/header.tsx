@@ -1,10 +1,11 @@
+
 'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Bomb, Rocket, Wrench } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import UserNav from '@/components/auth/user-nav';
 import { useAuth } from '@/components/auth/auth-provider';
 import MemberCount from './member-count';
@@ -33,8 +34,8 @@ export default function Header() {
     <header className="flex items-center justify-between p-4 border-b">
       <div className="flex items-center gap-4">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/assets/logo.png" alt="Company Logo" width={96} height={96} />
-          <span className="font-bold text-lg">The Soapbox</span>
+          <Image src="/assets/logo.png" alt="Company Logo" width={80} height={80} className="w-12 h-auto md:w-24" />
+          <span className="font-bold text-lg hidden sm:inline-block">The Soapbox</span>
         </Link>
         <div className="hidden md:block">
          <MemberCount />
@@ -42,7 +43,7 @@ export default function Header() {
       </div>
       
       {/* Desktop Menu */}
-      <nav className="hidden md:flex items-center gap-4">
+      <nav className="hidden md:flex items-center gap-2">
         <NavMenu />
         <UserNav />
       </nav>

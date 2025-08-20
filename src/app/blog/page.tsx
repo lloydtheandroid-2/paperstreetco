@@ -9,14 +9,14 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default function BlogFaqPage() {
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto p-4 md:p-8">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-2">Support Group</h1>
-        <p className="text-muted-foreground">Your questions and our thoughts, all in one place.</p>
+        <h1 className="text-4xl md:text-5xl font-bold mb-2">Support Group</h1>
+        <p className="text-lg text-muted-foreground">Your questions and our thoughts, all in one place.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-        {/* FAQ Section (Left 1/3) */}
+        {/* FAQ Section */}
         <div className="md:col-span-1">
           <h2 className="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible className="w-full">
@@ -47,7 +47,7 @@ export default function BlogFaqPage() {
           </Accordion>
         </div>
 
-        {/* Blog Section (Right 2/3) */}
+        {/* Blog Section */}
         <div className="md:col-span-2">
            <h2 className="text-3xl font-bold mb-6">Latest Musings</h2>
            <div className="space-y-8">

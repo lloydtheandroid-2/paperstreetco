@@ -20,11 +20,17 @@ function TrainingResourcesDialog({ technologies, children, title }: { technologi
 
   const handleOpenChange = async (open: boolean) => {
     setIsOpen(open);
-    if (open && resources.length === 0) {
+    if (open && resources.length === 0 && technologies.length > 0) {
       setIsLoading(true);
-      const fetchedResources = await getTrainingResources(technologies);
-      setResources(fetchedResources);
-      setIsLoading(false);
+      try {
+        const fetchedResources = await getTrainingResources(technologies);
+        setResources(fetchedResources);
+      } catch (error) {
+        console.error("Failed to fetch training resources:", error);
+        // Optionally, set an error state to show a message to the user
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -66,7 +72,7 @@ function TrainingResourcesDialog({ technologies, children, title }: { technologi
             </div>
           ) : (
              <div className="text-center p-8">
-                <p className="text-muted-foreground">No resources found at this time. Please try again later.</p>
+                <p className="text-muted-foreground">No resources found for this topic yet.</p>
             </div>
           )}
         </div>
@@ -78,27 +84,34 @@ function TrainingResourcesDialog({ technologies, children, title }: { technologi
 
 export default function RoadmapPage() {
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto px-4 md:px-0">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold mb-2">Project Roadmap</h1>
+        <h1 className="text-4xl md:text-5xl font-bold mb-2">Project Roadmap</h1>
         <p className="text-muted-foreground text-lg">A sequential path to enlightenment and controlled chaos. Click any step to get learning resources.</p>
       </div>
       
-      <div className="relative pl-4">
-        {/* The vertical line */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-10 bottom-10 w-0.5 bg-border hidden md:block"></div>
+      <div className="relative md:pl-4">
+        {/* The vertical line for desktop */}
+        <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-10 bottom-10 w-0.5 bg-border"></div>
 
-        <div className="space-y-16">
+        <div className="space-y-12 md:space-y-16">
           {roadmapItems.map((item, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8 relative">
+            <div key={index} className="grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr] items-start md:items-center gap-x-4 md:gap-x-8 relative">
               
-              {/* Card Left or Right */}
-              <div className={`md:col-start-1 ${index % 2 !== 0 ? 'md:col-start-3' : ''} ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+               {/* Milestone Icon */}
+              <div className="col-start-1 row-start-1 flex justify-center md:hidden z-10">
+                <div className="bg-background p-2 rounded-full border">
+                  <RoadmapIcon icon={item.icon} />
+                </div>
+              </div>
+
+              {/* Card - Stacks on mobile, alternates on desktop */}
+              <div className={`col-start-2 md:col-start-1 ${index % 2 !== 0 ? 'md:col-start-3' : ''} ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} row-start-1`}>
                  <TrainingResourcesDialog technologies={item.technologies} title={item.subtitle}>
                    <Card className="cursor-pointer hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
                     <CardHeader>
                       <div className={`flex items-center gap-4 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                        <div className="flex-shrink-0">
+                        <div className="hidden md:flex flex-shrink-0">
                           <RoadmapIcon icon={item.icon} />
                         </div>
                         <div>
@@ -119,17 +132,14 @@ export default function RoadmapPage() {
                  </TrainingResourcesDialog>
               </div>
 
-              {/* Milestone Icon */}
-              <div className="absolute md:relative left-1/2 md:left-auto -translate-x-1/2 md:translate-x-0 md:col-start-2 h-full">
+              {/* Milestone Icon - Desktop */}
+              <div className="absolute md:relative left-1/2 md:left-auto -translate-x-1/2 md:translate-x-0 md:col-start-2 h-full z-10">
                 <div className="hidden md:flex items-center h-full">
                    <div className="bg-background p-2 rounded-full border">
                       <Milestone className="w-6 h-6 text-primary" />
                    </div>
                 </div>
               </div>
-
-               {/* Empty placeholder for grid layout */}
-              <div className="hidden md:block"></div>
             </div>
           ))}
         </div>

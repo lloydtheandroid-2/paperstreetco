@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { roadmapItems } from '@/lib/roadmap-data';
+import { roadmapItems, RoadmapItem } from '@/lib/roadmap-data';
 import { Code, Eye, ChevronLeft, ChevronRight, Check, FileCode2 } from 'lucide-react';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -107,7 +107,7 @@ function LearnViewContent() {
     const lessonIndex = getInitialLessonIndex();
     setCurrentLessonIndex(lessonIndex);
     const newLesson = roadmapItems[lessonIndex];
-    if (newLesson) {
+    if (newLesson && newLesson.sampleCode) {
       const languages = Object.keys(newLesson.sampleCode);
       const currentLang = languages.includes(selectedLanguage) ? selectedLanguage : languages[0];
       if (!languages.includes(selectedLanguage)) {
@@ -171,7 +171,7 @@ function LearnViewContent() {
         <div className="p-4 md:p-8">
             <div className="mb-8">
                 <p className="text-sm text-primary font-semibold mb-1">{lesson.title}</p>
-                <h1 className="text-4xl font-bold">{lesson.subtitle}</h1>
+                <h1 className="text-3xl md:text-4xl font-bold">{lesson.subtitle}</h1>
                 <p className="text-muted-foreground mt-2">{lesson.description}</p>
             </div>
             
@@ -186,15 +186,15 @@ function LearnViewContent() {
             <Card className="mb-8">
                 <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                    <Code className="w-6 h-6" />
+                    <Code className="w-5 h-5" />
                     <span>Example Code</span>
                 </CardTitle>
                 <CardDescription>
-                    This is your starting point. Modify it in the editor below to experiment.
+                    This is your starting point. Modify it to experiment.
                 </CardDescription>
                 </CardHeader>
                 <CardContent>
-                <div className="bg-muted p-4 rounded-md text-sm text-muted-foreground">
+                <div className="bg-muted p-4 rounded-md text-sm text-muted-foreground overflow-x-auto">
                     <pre><code>{lesson.sampleCode[selectedLanguage as any]}</code></pre>
                 </div>
                 </CardContent>
@@ -210,21 +210,21 @@ function LearnViewContent() {
                 />
             </div>
 
-             <div className="flex items-center justify-between">
-                <Button variant="outline" onClick={handlePrev} disabled={currentLessonIndex === 0}>
+             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <Button variant="outline" onClick={handlePrev} disabled={currentLessonIndex === 0} className="w-full md:w-auto">
                     <ChevronLeft />
                     Previous
                 </Button>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-muted-foreground order-first md:order-none">
                     Rule {currentLessonIndex + 1} of {roadmapItems.length}
                 </div>
-                <div className="flex items-center gap-2">
-                  <Button onClick={handleComplete} variant={isCompleted ? "secondary" : "default"}>
+                <div className="flex items-center gap-2 w-full md:w-auto">
+                  <Button onClick={handleComplete} variant={isCompleted ? "secondary" : "default"} className="flex-1 md:flex-grow-0">
                       {isCompleted ? 'Completed' : 'Mark as Complete'}
                       <Check className={`ml-2 ${isCompleted ? 'opacity-100' : 'opacity-50'}`} />
                   </Button>
                    {currentLessonIndex < roadmapItems.length - 1 && (
-                    <Button onClick={handleNext} variant="outline">
+                    <Button onClick={handleNext} variant="outline" className="flex-1 md:flex-grow-0">
                         Next
                         <ChevronRight />
                     </Button>
@@ -238,15 +238,8 @@ function LearnViewContent() {
   return (
     <div className="h-[calc(100vh-theme(spacing.16))]">
       {lesson.hidePreview ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 h-full">
+        <div className="h-full">
             <div className="col-span-1 h-full">{mainContent}</div>
-            <div className="hidden md:flex col-span-1 h-full bg-muted items-center justify-center p-8">
-                <EmptyState
-                    icon={FileCode2}
-                    title="No Preview Available"
-                    description="This lesson focuses on concepts or code that runs in a terminal, not in a browser. Focus on understanding the example and experimenting in the editor."
-                />
-            </div>
         </div>
       ) : (
        <ResizablePanelGroup direction={isMobile ? "vertical" : "horizontal"} className="w-full h-full">
