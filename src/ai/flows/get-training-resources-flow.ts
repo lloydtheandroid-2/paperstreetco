@@ -25,13 +25,20 @@ const trainingResourcesPrompt = ai.definePrompt({
   input: {schema: TrainingResourcesInputSchema},
   output: {schema: TrainingResourcesOutputSchema},
   prompt: `
-    You are an expert tech education curator. Given a list of technologies, you will recommend the top 3-5 best online learning resources for them.
+    You are an expert tech education curator.
+    Your task is to recommend the top 3-5 best online learning resources for a given list of technologies.
 
-    For each technology, provide a mix of official documentation, a highly-rated online course (e.g., on Udemy, Coursera, or a standalone platform), and a popular tutorial or guide.
+    For each technology, please provide a mix of the following types of resources:
+    1.  The official documentation.
+    2.  A highly-rated online course (e.g., from platforms like Udemy, Coursera, freeCodeCamp, or a standalone site).
+    3.  A popular and well-regarded tutorial or in-depth guide (e.g., a blog post, a video series on YouTube).
 
-    Provide the name of the resource, a brief, compelling one-sentence description, and the direct URL.
+    For each resource, you must provide:
+    - The name of the resource.
+    - A brief, compelling one-sentence description explaining what it is and why it's valuable.
+    - The direct URL to the resource.
 
-    Technologies:
+    Here are the technologies to find resources for:
     {{#each technologies}}
     - {{this}}
     {{/each}}

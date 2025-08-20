@@ -81,7 +81,7 @@ function TrainingResourcesDialog({ technologies, children, title }: { technologi
                 </div>
               ))}
             </div>
-          ) : (
+          ) : resources.length > 0 ? (
             <div className="space-y-4">
               {resources.map((resource, index) => (
                 <Card key={index} className="bg-card/50">
@@ -98,6 +98,10 @@ function TrainingResourcesDialog({ technologies, children, title }: { technologi
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          ) : (
+             <div className="text-center p-8">
+                <p className="text-muted-foreground">No resources found at this time. Please try again later.</p>
             </div>
           )}
         </div>
