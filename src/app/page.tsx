@@ -25,7 +25,7 @@ export default function Home() {
 
       <main className="flex flex-col items-center w-full max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-          <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
+          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-accent">Project Mayhem</CardTitle>
               <CardDescription>A space for the Rogue Android</CardDescription>
@@ -37,7 +37,7 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
+          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-accent">Space Monkeys</CardTitle>
               <CardDescription>A space for Ground Control</CardDescription>
@@ -49,7 +49,7 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
+          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-accent">Lou's Basement</CardTitle>
               <CardDescription>A space for Double D</CardDescription>
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
 
         <div className="mt-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:w-2/3">
-           <Card className="bg-card/50 hover:bg-card/100 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
+           <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">Support Groups</CardTitle>
               <CardDescription>A place to let it all out.</CardDescription>
@@ -74,7 +74,7 @@ export default function Home() {
               </Link>
             </CardContent>
           </Card>
-          <Card className="bg-card/50 hover:bg-card/100 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
+          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">Project Roadmap</CardTitle>
               <CardDescription>Let go of the wheel.</CardDescription>
