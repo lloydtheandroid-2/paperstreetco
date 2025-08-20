@@ -24,14 +24,10 @@ function CodePreview({ code, language }: { code: string, language: string }) {
 
   React.useEffect(() => {
     // Only attempt to render if the language is JavaScript, which can be run in the browser
-    if (language.toLowerCase() === 'javascript') {
-      const timeoutId = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
         setIframeBody(code);
-      }, 500);
-      return () => clearTimeout(timeoutId);
-    } else {
-      setIframeBody('');
-    }
+    }, 500);
+    return () => clearTimeout(timeoutId);
   }, [code, language]);
 
   const srcDoc = `
@@ -80,15 +76,14 @@ function CodePreview({ code, language }: { code: string, language: string }) {
   );
 }
 
-
-function LearnView() {
+function LearnViewContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const { completedLessons, setCompletedLessons } = useProgressStore();
   const isMobile = useIsMobile();
 
-  const getInitialLessonIndex = () => {
+  const getInitialLessonIndex = React.useCallback(() => {
     const lessonParam = searchParams.get('lesson');
     if (lessonParam) {
       const lessonNum = parseInt(lessonParam, 10);
@@ -97,14 +92,14 @@ function LearnView() {
       }
     }
     return completedLessons.length < roadmapItems.length ? completedLessons.length : 0;
-  };
+  }, [searchParams, completedLessons.length]);
 
   const [currentLessonIndex, setCurrentLessonIndex] = React.useState(getInitialLessonIndex);
   const lesson = roadmapItems[currentLessonIndex];
-  const availableLanguages = Object.keys(lesson.sampleCode);
+  const availableLanguages = lesson ? Object.keys(lesson.sampleCode) : [];
   const [selectedLanguage, setSelectedLanguage] = React.useState(availableLanguages[0]);
 
-  const [userCode, setUserCode] = React.useState(lesson.sampleCode[selectedLanguage] || '');
+  const [userCode, setUserCode] = React.useState(lesson ? lesson.sampleCode[selectedLanguage] || '' : '');
   
   const isCompleted = completedLessons.includes(currentLessonIndex);
 
@@ -115,14 +110,16 @@ function LearnView() {
     if (newLesson) {
       const languages = Object.keys(newLesson.sampleCode);
       const currentLang = languages.includes(selectedLanguage) ? selectedLanguage : languages[0];
-      setSelectedLanguage(currentLang);
+      if (!languages.includes(selectedLanguage)) {
+        setSelectedLanguage(currentLang);
+      }
       setUserCode(newLesson.sampleCode[currentLang] || '');
       // Update URL without navigating
       const newUrl = `${window.location.pathname}?lesson=${lessonIndex}`;
       window.history.replaceState({ path: newUrl }, '', newUrl);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [searchParams, getInitialLessonIndex]);
 
   React.useEffect(() => {
     if (lesson) {
@@ -132,11 +129,7 @@ function LearnView() {
 
 
   if (!lesson) {
-    return (
-       <div className="h-[calc(100vh-theme(spacing.16))] flex items-center justify-center">
-         <p>Loading lesson...</p>
-       </div>
-    )
+    return <LearnPageLoading />;
   }
 
   const handleNext = () => {
@@ -278,6 +271,15 @@ function LearnView() {
   );
 }
 
+
+function LearnView() {
+  return (
+    <Suspense fallback={<LearnPageLoading />}>
+      <LearnViewContent />
+    </Suspense>
+  )
+}
+
 function LearnPageLoading() {
   return (
     <div className="h-[calc(100vh-theme(spacing.16))] p-4 md:p-8">
@@ -293,13 +295,7 @@ function LearnPageLoading() {
 }
 
 function LearnPage() {
-  return (
-    // You can't use useSearchParams in a page that is statically rendered.
-    // So we wrap the view in a suspense boundary.
-    <Suspense fallback={<LearnPageLoading />}>
-      <LearnView />
-    </Suspense>
-  )
+  return <LearnView />;
 }
 
 export default LearnPage;
