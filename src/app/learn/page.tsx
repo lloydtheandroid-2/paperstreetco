@@ -2,6 +2,7 @@
 'use client';
 
 import * as React from 'react';
+import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -12,6 +13,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useProgressStore } from '@/hooks/use-progress-store';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // A simple "preview" component that uses an iframe to render user HTML
 function CodePreview({ code }: { code: string }) {
@@ -36,7 +38,8 @@ function CodePreview({ code }: { code: string }) {
   );
 }
 
-export default function LearnPage() {
+
+function LearnView() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
@@ -51,7 +54,7 @@ export default function LearnPage() {
       }
     }
     // Start at the lesson after the last completed one by default
-    return completedLessons.length;
+    return completedLessons.length < roadmapItems.length ? completedLessons.length : 0;
   };
 
   const [currentLessonIndex, setCurrentLessonIndex] = React.useState(getInitialLessonIndex);
@@ -61,27 +64,38 @@ export default function LearnPage() {
   const isCompleted = completedLessons.includes(currentLessonIndex);
 
   React.useEffect(() => {
-    if (roadmapItems[currentLessonIndex]) {
-      setUserCode(roadmapItems[currentLessonIndex].sampleCode || '');
+    const lessonIndex = getInitialLessonIndex();
+    setCurrentLessonIndex(lessonIndex);
+    if (roadmapItems[lessonIndex]) {
+      setUserCode(roadmapItems[lessonIndex].sampleCode || '');
       // Update URL without navigating
-      const newUrl = `${window.location.pathname}?lesson=${currentLessonIndex}`;
-      window.history.pushState({ path: newUrl }, '', newUrl);
+      const newUrl = `${window.location.pathname}?lesson=${lessonIndex}`;
+      window.history.replaceState({ path: newUrl }, '', newUrl);
     }
-  }, [currentLessonIndex]);
-  
-  React.useEffect(() => {
-    setCurrentLessonIndex(getInitialLessonIndex());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
+
+  if (!lesson) {
+    // This can happen if the query param is invalid initially.
+    // getInitialLessonIndex will correct it on the next render.
+    return (
+       <div className="h-[calc(100vh-theme(spacing.16))] flex items-center justify-center">
+         <p>Loading lesson...</p>
+       </div>
+    )
+  }
 
   const handleNext = () => {
     if (currentLessonIndex < roadmapItems.length - 1) {
-      setCurrentLessonIndex(currentLessonIndex + 1);
+      const nextIndex = currentLessonIndex + 1;
+      router.push(`/learn?lesson=${nextIndex}`);
     }
   };
 
   const handlePrev = () => {
     if (currentLessonIndex > 0) {
-      setCurrentLessonIndex(currentLessonIndex - 1);
+      const prevIndex = currentLessonIndex - 1;
+      router.push(`/learn?lesson=${prevIndex}`);
     }
   };
 
@@ -95,7 +109,6 @@ export default function LearnPage() {
     }
 
     if (currentLessonIndex === roadmapItems.length - 1) {
-        // Last lesson completed
         toast({
             title: "Roadmap Complete!",
             description: "You've mastered all the rules. It's time to build.",
@@ -105,14 +118,6 @@ export default function LearnPage() {
         handleNext();
     }
   };
-
-  if (!lesson) {
-    // This can happen if all lessons are completed, or invalid query param
-    React.useEffect(() => {
-      router.push('/dashboard');
-    }, [router]);
-    return null;
-  }
 
   return (
     <div className="h-[calc(100vh-theme(spacing.16))]">
@@ -192,4 +197,26 @@ export default function LearnPage() {
        </ResizablePanelGroup>
     </div>
   );
+}
+
+function LearnPageLoading() {
+  return (
+    <div className="h-[calc(100vh-theme(spacing.16))] p-4 md:p-8">
+      <div className="mb-8">
+        <Skeleton className="h-5 w-1/4 mb-2" />
+        <Skeleton className="h-10 w-1/2 mb-3" />
+        <Skeleton className="h-4 w-3/4" />
+      </div>
+      <Skeleton className="w-full h-48 mb-8" />
+      <Skeleton className="w-full h-56" />
+    </div>
+  )
+}
+
+export default function LearnPage() {
+  return (
+    <Suspense fallback={<LearnPageLoading />}>
+      <LearnView />
+    </Suspense>
+  )
 }
