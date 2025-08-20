@@ -22,9 +22,9 @@ const auth: Auth = getAuth(app);
 
 // Connect to Auth Emulator in development
 if (process.env.NODE_ENV === 'development') {
-  // Point to the emulators running on localhost.
-  // Use 127.0.0.1 instead of `localhost` to avoid potential network issues.
-  connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
+  // Use the host from the environment variable, or default to 127.0.0.1
+  const host = process.env.FIREBASE_EMULATOR_HOST || '127.0.0.1';
+  connectAuthEmulator(auth, `http://${host}:9099`, { disableWarnings: true });
 }
 
 export { app, auth };
