@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Code, Database, BrainCircuit, Cloud, Milestone, ShieldCheck, Gem } from "lucide-react";
+import { Code, Database, BrainCircuit, Cloud, Milestone, ShieldCheck, Shirt, Users, Goal, Repeat } from "lucide-react";
 import { getTrainingResources } from '@/ai/flows/get-training-resources-flow';
 import type { TrainingResource } from '@/ai/flows/schemas/training-resources-schema';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -12,39 +12,53 @@ import Link from 'next/link';
 
 const roadmapItems = [
   {
-    title: "Rule #1: You DO Talk About Soapbox",
+    title: "Rule #1 & #2: You Do Not Talk About It",
     subtitle: "The Foundation",
-    description: "First, you have to talk about it. Spread the word. You start with the fundamentals. Structure with HTML, style with CSS, and bring it to life with JavaScript. We use modern tools like React and Next.js, styled with Tailwind and ShadCN, because the things you own, end up owning you.",
+    description: "The first rule of mastery is focus. The second rule is focus. Before you can change the world, you must quietly build your skills. This is the foundation: structure, style, and interaction. Let your work speak for you.",
     icon: <Code className="w-8 h-8 text-accent" />,
-    technologies: ["HTML5", "CSS3", "JavaScript", "React", "Next.js", "Tailwind CSS", "ShadCN UI"],
+    technologies: ["HTML5", "CSS3", "JavaScript", "React", "Next.js", "Tailwind CSS"],
   },
   {
-    title: "Rule #2: If It's Your First Night, You HAVE to Code",
-    subtitle: "Build the Machine",
-    description: "A front-end is just a mask. To have real impact, you need a brain behind it. We connect our apps to full-stack backends and persistent data stores. We also explore immersive 3D experiences with Three.js. This is where your project develops a memory and a new dimension.",
-    icon: <Database className="w-8 h-8 text-accent" />,
-    technologies: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs", "Three.js"],
+    title: "Rule #3: If Someone Taps, the Fight is Over",
+    subtitle: "Graceful Exits & Error Handling",
+    description: "Your code will face errors. It will be pushed to its limits. A robust system knows when to tap out. This is about building resilient applications with proper error handling, state management, and user feedback.",
+    icon: <Goal className="w-8 h-8 text-accent" />,
+    technologies: ["State Management", "Error Boundaries", "Logging", "User Feedback"],
   },
   {
-    title: "Rule #3: Achieve Self-Awareness",
-    subtitle: "Artificial Intelligence",
-    description: "It's only after we've lost everything that we're free to do anything. We give the machine a mind of its own, exploring AI models, agentic systems, and giving it a voice with Genkit.",
-    icon: <BrainCircuit className="w-8 h-8 text-accent" />,
-    technologies: ["Genkit", "LLMs", "Agents", "Prompt Engineering"],
+    title: "Rule #4: Only Two to a Fight",
+    subtitle: "Client & Server",
+    description: "Every meaningful interaction is a dance between two parties. The client makes a request, the server responds. This is about building full-stack applications and understanding the relationship between the front-end and the back-end.",
+    icon: <Users className="w-8 h-8 text-accent" />,
+    technologies: ["Node.js", "Express", "REST APIs", "GraphQL", "Server Components"],
   },
    {
-    title: "Rule #4: Prepare for Mayhem",
-    subtitle: "Security & Hardening",
-    description: "You have to know the rules to break them. Before we can unleash our creations, we must understand how to protect them. This is about securing endpoints, managing user data responsibly, and building resilient systems.",
-    icon: <ShieldCheck className="w-8 h-8 text-accent" />,
-    technologies: ["Authentication", "Authorization", "Input Validation", "Firebase App Check", "Security Rules"],
+    title: "Rule #5: One Fight at a Time",
+    subtitle: "Process & Persistence",
+    description: "You can't do everything at once. Focus on one problem, one feature, one bug at a time. This is where you connect to a persistent data store, making your application remember. This is where you bring it to a new dimension.",
+    icon: <Database className="w-8 h-8 text-accent" />,
+    technologies: ["MongoDB", "PostgreSQL", "Firebase Firestore", "Three.js"],
   },
   {
-    title: "Rule #5: Let Go of the Wheel",
-    subtitle: "Cloud & Containerization",
-    description: "This is your life and it's ending one minute at a time. We package our projects for a global scale, deploying them using modern cloud infrastructure. Your creation is no longer yours; it belongs to the world.",
-    icon: <Cloud className="w-8 h-8 text-accent" />,
-    technologies: ["Docker", "Kubernetes", "Firebase Hosting", "Cloud Functions"],
+    title: "Rule #6: No Shirts, No Shoes",
+    subtitle: "Bare Metal & AI",
+    description: "Strip away the non-essential. Get to the core of the problem. Here, we give the machine a mind of its own, exploring raw AI models and agentic systems. No abstractions, just pure potential.",
+    icon: <BrainCircuit className="w-8 h-8 text-accent" />,
+    technologies: ["Genkit", "LLMs", "Agents", "Prompt Engineering", "ShadCN UI"],
+  },
+  {
+    title: "Rule #7: Fights Go On as Long as They Have To",
+    subtitle: "Deploy & Iterate",
+    description: "Shipping is not the end. It's the beginning. A project is never truly finished. It must be deployed, monitored, and continuously improved. This is about the lifecycle of software in the wild.",
+    icon: <Repeat className="w-8 h-8 text-accent" />,
+    technologies: ["Docker", "Kubernetes", "Firebase Hosting", "CI/CD", "Monitoring"],
+  },
+  {
+    title: "Rule #8: If It's Your First Night, You Have to Fight",
+    subtitle: "Security & Hardening",
+    description: "Welcome to the real world. Your first challenge is to secure your creation. Before you can unleash it, you must protect it. This is about authentication, hardening endpoints, and responsible data management. You have to fight.",
+    icon: <ShieldCheck className="w-8 h-8 text-accent" />,
+    technologies: ["Authentication", "Authorization", "Input Validation", "Firebase App Check", "Security Rules"],
   },
 ];
 
