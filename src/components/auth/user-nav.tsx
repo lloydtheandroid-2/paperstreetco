@@ -18,12 +18,16 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from './auth-provider';
 import { auth } from '@/lib/firebase';
+import { useRouter } from 'next/navigation';
 
 export default function UserNav() {
   const { user, loading } = useAuth();
+  const router = useRouter();
   
   const handleLogout = () => {
-    auth.signOut();
+    auth.signOut().then(() => {
+      router.push('/');
+    });
   };
   
   if (loading || !user) {
