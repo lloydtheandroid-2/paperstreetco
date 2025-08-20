@@ -61,13 +61,13 @@ console.log(output);`
     description: "Strip away the non-essential. No frameworks, no libraries, just you and the raw power of the machine. This is about understanding what's underneath. Here, we give the machine a mind of its own. No abstractions, just pure potential.",
     icon: <Shirt className="w-8 h-8 text-accent" />,
     technologies: ["Docker", "Kubernetes", "Firebase Hosting", "CI/CD", "Monitoring"],
-    sampleCode: \`FROM node:18
+    sampleCode: `FROM node:18
 WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
 EXPOSE 3000
-CMD ["npm", "run", "dev"]\`
+CMD ["npm", "run", "dev"]`
   },
   {
     title: "Rule #7: Fights Go On as Long as They Have To",
