@@ -43,8 +43,8 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
              <div className="flex justify-between items-center py-4">
-              {[...Array(totalLessons)].map((_, i) => (
-                <Skeleton key={i} className="h-8 w-8 rounded-full" />
+              {[...Array(5)].map((_, i) => (
+                <Skeleton key={i} className="h-12 w-12 rounded-full" />
               ))}
             </div>
           </CardContent>
@@ -56,6 +56,8 @@ export default function DashboardPage() {
       </div>
     )
   }
+  
+  let lastMilestoneTitle = '';
 
   return (
     <TooltipProvider>
@@ -71,13 +73,20 @@ export default function DashboardPage() {
             <CardTitle>Your Roadmap Progress</CardTitle>
             <CardDescription>{completedCount} of {totalLessons} rules mastered.</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="flex items-center">
+          <CardContent className="pt-4">
+             <div className="flex items-center">
               {roadmapItems.map((item, index) => {
                 const isCompleted = completedLessons.includes(index);
                 const isCurrent = index === completedCount;
-                const isNext = index === completedCount;
-                
+                const isMilestone = item.title !== lastMilestoneTitle;
+                if (isMilestone) {
+                  lastMilestoneTitle = item.title;
+                }
+
+                // Determine if the connector should be thick (between milestones)
+                const nextItem = roadmapItems[index + 1];
+                const isMilestoneConnector = nextItem && nextItem.title !== item.title;
+
                 return (
                   <React.Fragment key={index}>
                     <Tooltip>
@@ -85,21 +94,23 @@ export default function DashboardPage() {
                         <Link href={`/learn?lesson=${index}`}>
                           <div
                             className={cn(
-                              "w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300",
+                              "rounded-full flex items-center justify-center border-2 transition-all duration-300",
+                              isMilestone ? "w-10 h-10" : "w-6 h-6",
                               isCompleted ? "bg-primary border-primary" : "bg-muted border-border",
-                              isCurrent && "border-primary scale-125 shadow-lg shadow-primary/20",
+                              isCurrent && "border-primary scale-110 shadow-lg shadow-primary/20",
                               !isCompleted && !isCurrent && "hover:border-primary/50"
                             )}
                           >
                             {isCompleted ? (
-                              <Check className="w-5 h-5 text-primary-foreground" />
+                              <Check className={cn("text-primary-foreground", isMilestone ? "w-6 h-6" : "w-4 h-4")} />
                             ) : (
-                               <Circle className={cn("w-3 h-3", isCurrent ? 'text-primary' : 'text-muted-foreground')}/>
+                               <Circle className={cn(isCurrent ? 'text-primary' : 'text-muted-foreground', isMilestone ? "w-4 h-4" : "w-2 h-2")}/>
                             )}
                           </div>
                         </Link>
                       </TooltipTrigger>
                       <TooltipContent>
+                        {isMilestone && <p className="font-bold text-primary">{item.title}</p>}
                         <p className="font-semibold">{item.subtitle}</p>
                         <p className="text-sm text-muted-foreground">{ isCompleted ? "Completed" : isCurrent ? "Next Up" : "Pending" }</p>
                       </TooltipContent>
@@ -108,7 +119,8 @@ export default function DashboardPage() {
                     {index < roadmapItems.length - 1 && (
                        <div className={cn(
                         "flex-1 h-1 transition-colors duration-500",
-                        completedLessons.includes(index) ? 'bg-primary' : 'bg-border'
+                        isCompleted ? 'bg-primary' : 'bg-border',
+                        isMilestoneConnector ? 'h-1.5' : 'h-0.5'
                        )}></div>
                     )}
                   </React.Fragment>
@@ -127,13 +139,13 @@ export default function DashboardPage() {
                 <CardTitle className="text-2xl">Last Accomplishment</CardTitle>
               </div>
               <CardDescription>
-                {lastCompletedLesson ? "You've already proven yourself here." : "A blank slate is a world of opportunity."}
+                {lastCompletedLesson ? `Rule: "${lastCompletedLesson.subtitle}"` : "A blank slate is a world of opportunity."}
               </CardDescription>
             </CardHeader>
             <CardContent>
               {lastCompletedLesson ? (
                 <div>
-                  <h3 className="font-bold text-lg">{lastCompletedLesson.subtitle}</h3>
+                  <h3 className="font-bold text-lg">{lastCompletedLesson.title}</h3>
                   <p className="text-muted-foreground mt-1">{lastCompletedLesson.description}</p>
                 </div>
               ) : (
@@ -159,7 +171,7 @@ export default function DashboardPage() {
                   <h3 className="font-bold text-lg">{nextLesson.subtitle}</h3>
                   <p className="text-muted-foreground mt-1">{nextLesson.description}</p>
                   <Button asChild className="mt-4">
-                    <Link href="/learn">
+                    <Link href={`/learn?lesson=${completedCount}`}>
                       Begin Lesson <ChevronRight className="w-4 h-4 ml-2" />
                     </Link>
                   </Button>
