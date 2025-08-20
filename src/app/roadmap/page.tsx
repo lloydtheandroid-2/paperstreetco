@@ -57,15 +57,15 @@ const roadmapItems = [
   {
     title: "Rule #7: Fights Go On as Long as They Have To",
     subtitle: "The Long Haul",
-    description: "Shipping is not the end. It's the beginning. A project is never truly finished. It must be deployed, monitored, and continuously improved. This is the lifecycle of software in the wild. It goes on as long as it has to.",
-    icon: <Repeat className="w-8 h-8 text-accent" />,
+    description: "A project is never truly finished. It must be deployed, monitored, and continuously improved. This is where you secure your application. It goes on as long as it has to.",
+    icon: <ShieldCheck className="w-8 h-8 text-accent" />,
     technologies: ["Authentication", "Authorization", "Input Validation", "Firebase App Check", "Security Rules"],
   },
   {
     title: "Rule #8: If It's Your First Night, You Have to Fight",
     subtitle: "Start Now",
     description: "Welcome to the real world. No more tutorials, no more waiting for the 'right time'. Your first challenge is to build something real. You have to fight. You have to start. It's time to code.",
-    icon: <ShieldCheck className="w-8 h-8 text-accent" />,
+    icon: <Goal className="w-8 h-8 text-accent" />,
     technologies: ["Project Scoping", "User Stories", "Git", "Deployment", "Problem Solving"],
   },
 ];
