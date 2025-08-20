@@ -9,11 +9,14 @@ export const roadmapItems = [
     description: "Understand what programming is and how humans use it to give instructions to computers. It's a language, a tool, and a craft.",
     icon: <Binary className="w-8 h-8 text-accent" />,
     technologies: ["Conceptual"],
+    hidePreview: true,
     sampleCode: {
       "JavaScript": `// This is a comment. It's text for humans, ignored by the computer.
-// Code is just a set of instructions, like a recipe.`,
+// Code is just a set of instructions, like a recipe.
+console.log("This message will appear in your browser's developer console.");`,
       "Python": `# This is a comment. It's text for humans, ignored by the computer.
-# Code is just a set of instructions, like a recipe.`
+# Code is just a set of instructions, like a recipe.
+print("This message would appear in a Python terminal.")`
     }
   },
   {
@@ -23,10 +26,14 @@ export const roadmapItems = [
     icon: <ToyBrick className="w-8 h-8 text-accent" />,
     technologies: ["Variables", "Data Types"],
     sampleCode: {
-      "JavaScript": `let myName = "Tyler"; // A variable 'myName' storing text
-let myAge = 30; // A variable 'myAge' storing a number`,
+      "JavaScript": `// Try changing the values and see the output change!
+let myName = "Tyler"; 
+let myAge = 30; 
+
+document.body.innerHTML = \`<h1>Hello, \${myName}</h1><p>You are \${myAge} years old.</p>\`;`,
       "Python": `my_name = "Tyler" # A variable 'my_name' storing text
-my_age = 30 # A variable 'my_age' storing a number`
+my_age = 30 # A variable 'my_age' storing a number
+# Python code like this can't run in the browser, but this is the syntax.`
     }
   },
   {
@@ -36,17 +43,19 @@ my_age = 30 # A variable 'my_age' storing a number`
     icon: <FunctionSquare className="w-8 h-8 text-accent" />,
     technologies: ["Functions"],
     sampleCode: {
-      "JavaScript": `function greet() {
-  return "Welcome to the Soapbox.";
+      "JavaScript": `function greet(name) {
+  return "Welcome to the Soapbox, " + name + ".";
 }
 
 // Call the function to get the greeting:
-greet();`,
-      "Python": `def greet():
-  return "Welcome to the Soapbox."
+const message = greet("Marla");
+document.body.innerHTML = message;`,
+      "Python": `def greet(name):
+  return "Welcome to the Soapbox, " + name + "."
 
 # Call the function to get the greeting:
-greet()`
+message = greet("Marla")
+print(message)`
     }
   },
   {
@@ -59,12 +68,16 @@ greet()`
       "JavaScript": `let memberCount = 8;
 
 if (memberCount > 7) {
-  // The first rule is...
+  document.body.innerHTML = "The first rule is...";
+} else {
+  document.body.innerHTML = "We need more members.";
 }`,
       "Python": `member_count = 8
 
 if member_count > 7:
-  # The first rule is...`
+  print("The first rule is...")
+else:
+  print("We need more members.")`
     }
   },
   {
@@ -78,13 +91,16 @@ if member_count > 7:
   name: "Marla Singer",
   hasAttended: true,
   meetings: 12
-};`,
+};
+
+document.body.innerHTML = \`<h2>User: \${user.name}</h2><p>Meetings: \${user.meetings}</p>\`;`,
       "Python": `# In Python, these are called Dictionaries
 user = {
   "name": "Marla Singer",
   "has_attended": True,
   "meetings": 12
-}`
+}
+print(user["name"])`
     }
   },
 
@@ -96,8 +112,12 @@ user = {
     icon: <Code className="w-8 h-8 text-accent" />,
     technologies: ["HTML5"],
     sampleCode: {
-      "JavaScript": `<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>`
+      "JavaScript": `<!-- This is HTML. It describes the content of a page. -->
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+<button>This is a button</button>`,
+      "Python": `# HTML isn't a feature of Python.
+# It's the language that web browsers read to display content.`
     }
   },
   {
@@ -107,13 +127,20 @@ user = {
     icon: <Code className="w-8 h-8 text-accent" />,
     technologies: ["CSS3"],
     sampleCode: {
-      "JavaScript": `<style>
+      "JavaScript": `<!-- CSS is embedded in a <style> tag or a separate file. -->
+<style>
   p {
-    color: red;
-    font-size: 16px;
+    color: hsl(var(--primary));
+    font-size: 18px;
+    font-family: serif;
+  }
+  .important {
+    font-weight: bold;
   }
 </style>
-<p>This paragraph is now red.</p>`
+<p>This paragraph is now styled.</p>
+<p class="important">This one is important.</p>`,
+      "Python": `# CSS is for styling web pages. It is not used in standard Python.`
     }
   },
   {
@@ -123,7 +150,15 @@ user = {
     icon: <Code className="w-8 h-8 text-accent" />,
     technologies: ["JavaScript"],
     sampleCode: {
-      "JavaScript": `<button onclick="alert('Hello World!')">Click Me</button>`
+      "JavaScript": `<h1 id="title">Welcome!</h1>
+<button onclick="changeTitle()">Click Me</button>
+
+<script>
+  function changeTitle() {
+    document.getElementById('title').innerText = 'You are a Space Monkey!';
+  }
+</script>`,
+       "Python": `# Python can be used for web backends, but not for direct browser interaction like this.`
     }
   },
   {
@@ -132,12 +167,19 @@ user = {
     description: "Start thinking in components. Learn the basics of React and how it helps build complex UIs.",
     icon: <Layers className="w-8 h-8 text-accent" />,
     technologies: ["React"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `function MyButton() {
+      "JavaScript": `// This is a React component. 
+// It's a reusable piece of UI.
+// We can't render this here, but this is what the code looks like.
+import React from 'react';
+
+function MyButton() {
   return (
     <button>I'm a button</button>
   );
-}`
+}`,
+      "Python": `# React is a JavaScript library. There are Python frameworks for web UIs, like Django and Flask, but they work differently.`
     }
   },
 
@@ -148,9 +190,12 @@ user = {
     description: "Move from a single file to a full project structure with the most popular React framework.",
     icon: <Building className="w-8 h-8 text-accent" />,
     technologies: ["Next.js", "npm"],
+    hidePreview: true,
     sampleCode: {
       "JavaScript": `// You don't code this, you run it in your terminal!
-npx create-next-app@latest`
+// This command creates a new Next.js application in a folder.
+npx create-next-app@latest`,
+       "Python": `# This is a command for setting up a JavaScript project.`
     }
   },
   {
@@ -160,9 +205,14 @@ npx create-next-app@latest`
     icon: <Building className="w-8 h-8 text-accent" />,
     technologies: ["Tailwind CSS"],
     sampleCode: {
-      "JavaScript": `<h1 class="text-3xl font-bold underline">
+      "JavaScript": `<!-- With Tailwind, you add classes to style elements -->
+<h1 class="text-3xl font-bold underline text-primary">
   Hello, Tailwind!
-</h1>`
+</h1>
+<p class="p-4 bg-muted rounded-md mt-2">
+  This is a styled paragraph.
+</p>`,
+        "Python": `# Tailwind is for styling HTML and is not used in Python.`
     }
   },
   {
@@ -171,11 +221,21 @@ npx create-next-app@latest`
     description: "Manage dynamic data within your components using React's built-in \`useState\` and \`useEffect\` hooks.",
     icon: <Building className="w-8 h-8 text-accent" />,
     technologies: ["React Hooks"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `const [count, setCount] = useState(0);
-<button onClick={() => setCount(count + 1)}>
-  You clicked {count} times
-</button>`
+      "JavaScript": `// This React code uses hooks to manage state.
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      You clicked {count} times
+    </button>
+  );
+}`,
+       "Python": `# Python classes and functions can have state, but the 'hook' concept is specific to React.`
     }
   },
   {
@@ -184,12 +244,20 @@ npx create-next-app@latest`
     description: "Create a multi-page feel in a single-page application using Next.js's App Router.",
     icon: <Building className="w-8 h-8 text-accent" />,
     technologies: ["Next.js Router"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `import Link from 'next/link';
+      "JavaScript": `// In Next.js, you create links between pages like this.
+import Link from 'next/link';
 
-<Link href="/about">
-  <a>About Page</a>
-</Link>`
+function Nav() {
+  return (
+    <nav>
+      <Link href="/">Home</Link>
+      <Link href="/about">About Page</Link>
+    </nav>
+  )
+}`,
+       "Python": `# Web frameworks in Python like Django have their own systems for routing.`
     }
   },
 
@@ -200,11 +268,31 @@ npx create-next-app@latest`
     description: "Understand the role of a server and how it responds to requests from a browser. Create a simple one with Node.js.",
     icon: <Network className="w-8 h-8 text-accent" />,
     technologies: ["Node.js", "HTTP"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `const server = http.createServer((req, res) => {
+      "JavaScript": `// This Node.js code creates a basic web server.
+// It would run in a terminal, not a browser.
+import http from 'http';
+
+const server = http.createServer((req, res) => {
   res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
   res.end('Hello World');
-});`
+});
+
+server.listen(3000, '127.0.0.1', () => {
+  console.log('Server running at http://127.0.0.1:3000/');
+});`,
+       "Python": `// Python has built-in libraries for creating web servers too.
+import http.server
+import socketserver
+
+PORT = 8000
+Handler = http.server.SimpleHTTPRequestHandler
+
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print("serving at port", PORT)
+    httpd.serve_forever()`
     }
   },
   {
@@ -213,10 +301,25 @@ npx create-next-app@latest`
     description: "Create structured API endpoints to handle data requests from your frontend.",
     icon: <Network className="w-8 h-8 text-accent" />,
     technologies: ["Express", "REST APIs"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `app.get('/api/users', (req, res) => {
+      "JavaScript": `// Express is a popular framework for building APIs with Node.js
+import express from 'express';
+const app = express();
+
+app.get('/api/users', (req, res) => {
   res.json([{ id: 1, name: 'Tyler Durden' }]);
-});`
+});
+
+app.listen(3000);`,
+       "Python": `# Python frameworks like Flask or FastAPI are used for the same purpose.
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/api/users')
+def get_users():
+    return jsonify([{'id': 1, 'name': 'Tyler Durden'}])`
     }
   },
   {
@@ -225,12 +328,17 @@ npx create-next-app@latest`
     description: "Learn how Next.js allows you to run React components on the server to fetch data and improve performance.",
     icon: <Network className="w-8 h-8 text-accent" />,
     technologies: ["Server Components"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `async function MyServerComponent() {
-  const res = await fetch('...');
+      "JavaScript": `// This is a React Server Component. It runs only on the server.
+async function MyServerComponent() {
+  const res = await fetch('https://api.example.com/data');
   const data = await res.json();
+
+  // This JSX gets rendered to HTML on the server before being sent.
   return <div>{data.message}</div>
-}`
+}`,
+       "Python": `# This is a concept specific to Next.js/React.`
     }
   },
 
@@ -241,9 +349,14 @@ npx create-next-app@latest`
     description: "Learn why you need a database and the difference between SQL and NoSQL.",
     icon: <Database className="w-8 h-8 text-accent" />,
     technologies: ["Databases"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `// Conceptual
-SELECT * FROM users WHERE name = 'Marla';`
+      "JavaScript": `// Conceptual: An SQL query to get a user
+SELECT * FROM users WHERE name = 'Marla';
+
+// Conceptual: A NoSQL operation to get a user
+db.collection('users').find({ name: 'Marla' });`,
+      "Python": `# Python has libraries to connect to any kind of database.`
     }
   },
   {
@@ -252,9 +365,22 @@ SELECT * FROM users WHERE name = 'Marla';`
     description: "Set up and connect your application to a scalable, real-time NoSQL database from Google.",
     icon: <Database className="w-8 h-8 text-accent" />,
     technologies: ["Firebase Firestore"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `import { getFirestore } from "firebase/firestore";
-const db = getFirestore(app);`
+      "JavaScript": `// Import Firebase libraries and initialize
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = { /* ...your config... */ };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);`,
+      "Python": `import firebase_admin
+from firebase_admin import credentials, firestore
+
+cred = credentials.Certificate("path/to/serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()`
     }
   },
   {
@@ -263,11 +389,24 @@ const db = getFirestore(app);`
     description: "Perform basic Create, Read, Update, and Delete (CRUD) operations on your Firestore database.",
     icon: <Database className="w-8 h-8 text-accent" />,
     technologies: ["Firebase Firestore"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `await addDoc(collection(db, "users"), {
-  first: "Robert",
-  last: "Paulson"
-});`
+      "JavaScript": `import { collection, addDoc } from "firebase/firestore"; 
+
+// 'db' is your initialized Firestore instance
+async function addUser(name) {
+  await addDoc(collection(db, "users"), {
+    name: name,
+    member_since: new Date()
+  });
+}`,
+      "Python": `# 'db' is your initialized Firestore instance
+def add_user(name):
+  doc_ref = db.collection(u'users').document()
+  doc_ref.set({
+    u'name': name,
+    u'member_since': firestore.SERVER_TIMESTAMP
+  })`
     }
   },
 
@@ -278,11 +417,17 @@ const db = getFirestore(app);`
     description: "Meet the portable, open-source framework for building production-ready AI-powered features.",
     icon: <BrainCircuit className="w-8 h-8 text-accent" />,
     technologies: ["Genkit"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `import { genkit, configureGenkit } from 'genkit';
+      "JavaScript": `// Genkit lets you define 'flows' that use AI models.
+import { genkit, configureGenkit } from 'genkit';
 import { googleAI } from 'genkitx-googleai';
 
-// ... configureGenkit`
+configureGenkit({
+  plugins: [googleAI()],
+  // ...
+});`,
+      "Python": `# Genkit is primarily a TypeScript/JavaScript framework.`
     }
   },
   {
@@ -291,12 +436,21 @@ import { googleAI } from 'genkitx-googleai';
     description: "Create a simple Genkit flow that calls an LLM to generate text from a prompt.",
     icon: <BrainCircuit className="w-8 h-8 text-accent" />,
     technologies: ["Genkit", "LLMs"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `export const menuSuggestionFlow = defineFlow(
+      "JavaScript": `import { defineFlow, generate } from 'genkit';
+
+export const menuSuggestionFlow = defineFlow(
+  { name: 'menuSuggestionFlow' },
   async (topic) => {
-    //...
+    const llmResponse = await generate({
+      prompt: \`Suggest a menu for a \${topic} dinner party.\`,
+      model: 'googleai/gemini-pro',
+    });
+    return llmResponse.text();
   }
-);`
+);`,
+      "Python": `# This is a Genkit (JavaScript) example.`
     }
   },
   {
@@ -305,11 +459,18 @@ import { googleAI } from 'genkitx-googleai';
     description: "Force the AI to return clean, predictable JSON data by defining an output schema with Zod.",
     icon: <BrainCircuit className="w-8 h-8 text-accent" />,
     technologies: ["Genkit", "Zod"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `const recipeSchema = z.object({
+      "JavaScript": `import { z } from 'zod';
+
+const recipeSchema = z.object({
   dishName: z.string(),
+  ingredients: z.array(z.string()),
   steps: z.array(z.string()),
-});`
+});
+
+// You can then ask the AI to generate output in this format.`,
+       "Python": `# Zod is a TypeScript/JavaScript library. Python has similar libraries like Pydantic.`
     }
   },
   {
@@ -317,11 +478,22 @@ import { googleAI } from 'genkitx-googleai';
     subtitle: "Connecting AI to your UI",
     description: "Call your Genkit flow from a React component and display the results to the user.",
     icon: <BrainCircuit className="w-8 h-8 text-accent" />,
-    technologies: ["React", "Server Actions"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `const [response, setResponse] = useState();
-const R = await myFlow("Dinner");
-setResponse(R);`
+      "JavaScript": `// In a React component:
+import { menuSuggestionFlow } from './flows';
+
+async function MyComponent() {
+  const [suggestion, setSuggestion] = useState('');
+
+  const handleClick = async () => {
+    const result = await menuSuggestionFlow('tropical');
+    setSuggestion(result);
+  }
+  
+  return <button onClick={handleClick}>Get Suggestion</button>
+}`,
+      "Python": `# This is a React (JavaScript) example.`
     }
   },
 
@@ -332,13 +504,22 @@ setResponse(R);`
     description: "Understand how Docker containers package your application and its dependencies to run anywhere.",
     icon: <Shirt className="w-8 h-8 text-accent" />,
     technologies: ["Docker"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `FROM node:18
+      "JavaScript": `# This is a Dockerfile. It's a recipe for building a container.
+FROM node:18
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-CMD ["npm", "start"]`
+CMD ["npm", "start"]`,
+      "Python": `# You can containerize a Python app too.
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "app.py"]`
     }
   },
   {
@@ -347,9 +528,12 @@ CMD ["npm", "start"]`
     description: "Push your Next.js application to the web with a single command using Firebase Hosting.",
     icon: <Shirt className="w-8 h-8 text-accent" />,
     technologies: ["Firebase Hosting", "CI/CD"],
+    hidePreview: true,
     sampleCode: {
       "JavaScript": `// You don't code this, you run it in your terminal!
-firebase deploy --only hosting`
+// This command deploys your app to the world.
+firebase deploy --only hosting`,
+      "Python": `# The command is the same, but your firebase.json config would point to your Python server.`
     }
   },
 
@@ -360,9 +544,18 @@ firebase deploy --only hosting`
     description: "Add a complete authentication system to your app to manage users.",
     icon: <ShieldCheck className="w-8 h-8 text-accent" />,
     technologies: ["Authentication", "Firebase Auth"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `import { getAuth } from "firebase/auth";
-const auth = getAuth(app);`
+      "JavaScript": `// Sign in a user with Google
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+signInWithPopup(auth, provider);`,
+      "Python": `# You typically manage users on the backend with the Admin SDK.
+from firebase_admin import auth
+
+user = auth.get_user_by_email('user@example.com')
+print(f'Successfully fetched user data: {user.uid}')`
     }
   },
   {
@@ -371,10 +564,19 @@ const auth = getAuth(app);`
     description: "Protect your data by defining who can read, write, and update documents in your database.",
     icon: <ShieldCheck className="w-8 h-8 text-accent" />,
     technologies: ["Security Rules", "Firebase"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `match /users/{userId} {
-  allow read, write: if request.auth.uid == userId;
-}`
+      "JavaScript": `// This is not JavaScript, but a separate rules file for Firestore.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Only authenticated users can read their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+  }
+}`,
+      "Python": `# Security rules are configured in the Firebase console or deployed via the CLI.`
     }
   },
   {
@@ -383,10 +585,23 @@ const auth = getAuth(app);`
     description: "Never trust user input. Learn to validate and sanitize data on the server to prevent attacks.",
     icon: <ShieldCheck className="w-8 h-8 text-accent" />,
     technologies: ["Security"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `if (!input.email || !input.email.includes('@')) {
-  throw new Error('Invalid email');
-}`
+      "JavaScript": `// On your server, before saving data:
+function updateUser(input) {
+  if (!input.email || !input.email.includes('@')) {
+    throw new Error('Invalid email');
+  }
+  // ...save to database
+}`,
+      "Python": `from flask import request, abort
+
+@app.route('/update_user', methods=['POST'])
+def update_user():
+    email = request.form.get('email')
+    if not email or '@' not in email:
+        abort(400, description="Invalid email.")
+    # ...save to database`
     }
   },
 
@@ -397,10 +612,13 @@ const auth = getAuth(app);`
     description: "You have the tools. It's time to build something from scratch. No more tutorials. You have to fight.",
     icon: <Goal className="w-8 h-8 text-accent" />,
     technologies: ["Project Scoping", "Problem Solving", "Git"],
+    hidePreview: true,
     sampleCode: {
-      "JavaScript": `git init
+      "JavaScript": `// The most important commands in programming.
+git init
 git add .
-git commit -m "feat: Begin my project"`
+git commit -m "feat: Begin my project"`,
+      "Python": `# Git is universal for all languages.`
     }
   }
 ];

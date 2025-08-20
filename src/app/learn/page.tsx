@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { roadmapItems } from '@/lib/roadmap-data';
-import { Code, Eye, ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { Code, Eye, ChevronLeft, ChevronRight, Check, FileCode2 } from 'lucide-react';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useProgressStore } from '@/hooks/use-progress-store';
@@ -16,6 +16,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import EmptyState from '@/components/shared/empty-state';
 
 // A simple "preview" component that uses an iframe to render user HTML/JS
 function CodePreview({ code, language }: { code: string, language: string }) {
@@ -172,90 +173,107 @@ function LearnView() {
     }
   };
 
+  const mainContent = (
+    <ScrollArea className="h-full">
+        <div className="p-4 md:p-8">
+            <div className="mb-8">
+                <p className="text-sm text-primary font-semibold mb-1">{lesson.title}</p>
+                <h1 className="text-4xl font-bold">{lesson.subtitle}</h1>
+                <p className="text-muted-foreground mt-2">{lesson.description}</p>
+            </div>
+            
+            <Tabs value={selectedLanguage} onValueChange={setSelectedLanguage} className="mb-4">
+                <TabsList>
+                  {availableLanguages.map(lang => (
+                     <TabsTrigger key={lang} value={lang}>{lang}</TabsTrigger>
+                  ))}
+                </TabsList>
+            </Tabs>
+
+            <Card className="mb-8">
+                <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Code className="w-6 h-6" />
+                    <span>Example Code</span>
+                </CardTitle>
+                <CardDescription>
+                    This is your starting point. Modify it in the editor below to experiment.
+                </CardDescription>
+                </CardHeader>
+                <CardContent>
+                <div className="bg-muted p-4 rounded-md text-sm text-muted-foreground">
+                    <pre><code>{lesson.sampleCode[selectedLanguage]}</code></pre>
+                </div>
+                </CardContent>
+            </Card>
+
+            <div className="mb-8">
+                <h2 className="text-2xl font-bold mb-4">Your Editor</h2>
+                <Textarea
+                    value={userCode}
+                    onChange={(e) => setUserCode(e.target.value)}
+                    placeholder="Write your code here..."
+                    className="min-h-[200px] bg-card text-card-foreground font-mono"
+                />
+            </div>
+
+             <div className="flex items-center justify-between">
+                <Button variant="outline" onClick={handlePrev} disabled={currentLessonIndex === 0}>
+                    <ChevronLeft />
+                    Previous
+                </Button>
+                <div className="text-sm text-muted-foreground">
+                    Rule {currentLessonIndex + 1} of {roadmapItems.length}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button onClick={handleComplete} variant={isCompleted ? "secondary" : "default"}>
+                      {isCompleted ? 'Completed' : 'Mark as Complete'}
+                      <Check className={`ml-2 ${isCompleted ? 'opacity-100' : 'opacity-50'}`} />
+                  </Button>
+                   {currentLessonIndex < roadmapItems.length - 1 && (
+                    <Button onClick={handleNext} variant="outline">
+                        Next
+                        <ChevronRight />
+                    </Button>
+                   )}
+                </div>
+            </div>
+        </div>
+    </ScrollArea>
+  );
+
   return (
     <div className="h-[calc(100vh-theme(spacing.16))]">
+      {lesson.hidePreview ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 h-full">
+            <div className="col-span-1 h-full">{mainContent}</div>
+            <div className="hidden md:flex col-span-1 h-full bg-muted items-center justify-center p-8">
+                <EmptyState
+                    icon={FileCode2}
+                    title="No Preview Available"
+                    description="This lesson focuses on concepts or code that runs in a terminal, not in a browser. Focus on understanding the example and experimenting in the editor."
+                />
+            </div>
+        </div>
+      ) : (
        <ResizablePanelGroup direction={isMobile ? "vertical" : "horizontal"} className="w-full h-full">
-        <ResizablePanel defaultSize={50}>
-            <ScrollArea className="h-full">
-                <div className="p-4 md:p-8">
-                    <div className="mb-8">
-                        <p className="text-sm text-primary font-semibold mb-1">{lesson.title}</p>
-                        <h1 className="text-4xl font-bold">{lesson.subtitle}</h1>
-                        <p className="text-muted-foreground mt-2">{lesson.description}</p>
-                    </div>
-                    
-                    <Tabs value={selectedLanguage} onValueChange={setSelectedLanguage} className="mb-4">
-                        <TabsList>
-                          {availableLanguages.map(lang => (
-                             <TabsTrigger key={lang} value={lang}>{lang}</TabsTrigger>
-                          ))}
-                        </TabsList>
-                    </Tabs>
-
-                    <Card className="mb-8">
-                        <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <Code className="w-6 h-6" />
-                            <span>Example Code</span>
-                        </CardTitle>
-                        <CardDescription>
-                            This is your starting point. Modify it in the editor below to experiment.
-                        </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                        <div className="bg-muted p-4 rounded-md text-sm text-muted-foreground">
-                            <pre><code>{lesson.sampleCode[selectedLanguage]}</code></pre>
-                        </div>
-                        </CardContent>
-                    </Card>
-
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-bold mb-4">Your Editor</h2>
-                        <Textarea
-                            value={userCode}
-                            onChange={(e) => setUserCode(e.target.value)}
-                            placeholder="Write your code here..."
-                            className="min-h-[200px] bg-card text-card-foreground font-mono"
-                        />
-                    </div>
-
-                     <div className="flex items-center justify-between">
-                        <Button variant="outline" onClick={handlePrev} disabled={currentLessonIndex === 0}>
-                            <ChevronLeft />
-                            Previous
-                        </Button>
-                        <div className="text-sm text-muted-foreground">
-                            Rule {currentLessonIndex + 1} of {roadmapItems.length}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Button onClick={handleComplete} variant={isCompleted ? "secondary" : "default"}>
-                              {isCompleted ? 'Completed' : 'Mark as Complete'}
-                              <Check className={`ml-2 ${isCompleted ? 'opacity-100' : 'opacity-50'}`} />
-                          </Button>
-                           {currentLessonIndex < roadmapItems.length - 1 && (
-                            <Button onClick={handleNext} variant="outline">
-                                Next
-                                <ChevronRight />
-                            </Button>
-                           )}
-                        </div>
-                    </div>
-                </div>
-            </ScrollArea>
-        </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={50}>
-           <div className="flex flex-col h-full">
-             <div className="flex items-center gap-2 p-4 border-b bg-card">
-                <Eye className="w-5 h-5 text-primary" />
-                <h2 className="text-lg font-bold">Preview</h2>
-             </div>
-             <div className="flex-1">
-                <CodePreview code={userCode} language={selectedLanguage} />
-             </div>
-           </div>
-        </ResizablePanel>
+          <ResizablePanel defaultSize={50}>
+            {mainContent}
+          </ResizablePanel>
+          <ResizableHandle withHandle />
+          <ResizablePanel defaultSize={50}>
+            <div className="flex flex-col h-full">
+              <div className="flex items-center gap-2 p-4 border-b bg-card">
+                  <Eye className="w-5 h-5 text-primary" />
+                  <h2 className="text-lg font-bold">Preview</h2>
+              </div>
+              <div className="flex-1">
+                  <CodePreview code={userCode} language={selectedLanguage} />
+              </div>
+            </div>
+          </ResizablePanel>
        </ResizablePanelGroup>
+      )}
     </div>
   );
 }
