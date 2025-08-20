@@ -19,6 +19,7 @@ import {
 import { useAuth } from './auth-provider';
 import { getFirebaseAuth } from '@/lib/firebase';
 import Link from 'next/link';
+import LoginButton from './login-button';
 
 export default function UserNav() {
   const { user, loading } = useAuth();
@@ -32,7 +33,7 @@ export default function UserNav() {
   }
 
   if (!user) {
-    return null;
+    return <LoginButton />;
   }
 
   return (
