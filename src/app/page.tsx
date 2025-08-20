@@ -4,8 +4,6 @@ import { Bomb, GitMerge, Users } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import LoginButton from '@/components/auth/login-button';
-import { useAuth } from '@/components/auth/auth-provider';
 
 export default function Home() {
 
@@ -36,7 +34,9 @@ export default function Home() {
               <CardDescription>somebody spoke, didn't they?</CardDescription>
             </CardHeader>
             <CardContent>
-                <LoginButton />
+                <Link href="/dashboard" passHref>
+                  <Button className="w-full">Let's make some Soap</Button>
+                </Link>
             </CardContent>
           </Card>
         </div>

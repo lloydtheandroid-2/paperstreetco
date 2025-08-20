@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -16,11 +17,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from './auth-provider';
-import { auth } from '@/lib/firebase';
-import LoginButton from './login-button';
+import { getFirebaseAuth } from '@/lib/firebase';
 
 export default function UserNav() {
   const { user, loading } = useAuth();
+  const auth = getFirebaseAuth();
 
   const handleLogout = () => {
     auth.signOut();
@@ -31,7 +32,7 @@ export default function UserNav() {
   }
 
   if (!user) {
-    return <LoginButton />;
+    return null;
   }
 
   return (
