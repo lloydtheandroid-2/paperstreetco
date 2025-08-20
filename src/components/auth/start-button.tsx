@@ -18,8 +18,8 @@ export default function StartButton() {
     try {
       await signInWithPopup(auth, provider);
       // On successful login, the auth state will change, and the component will re-render.
-      // The button will now be a link to /learn. We can also push the user there directly.
-      router.push('/learn');
+      // The button will now be a link to /dashboard. We can also push the user there directly.
+      router.push('/dashboard');
     } catch (error) {
       console.error('Error signing in with Google', error);
       toast({
@@ -32,7 +32,7 @@ export default function StartButton() {
 
   const handleClick = () => {
     if (user) {
-      router.push('/learn');
+      router.push('/dashboard');
     } else {
       handleLogin();
     }

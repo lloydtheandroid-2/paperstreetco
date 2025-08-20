@@ -14,6 +14,8 @@ import { useProgressStore } from '@/hooks/use-progress-store';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useIsMobile } from '@/hooks/use-mobile';
+
 
 // A simple "preview" component that uses an iframe to render user HTML
 function CodePreview({ code }: { code: string }) {
@@ -44,6 +46,7 @@ function LearnView() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const { completedLessons, setCompletedLessons } = useProgressStore();
+  const isMobile = useIsMobile();
 
   const getInitialLessonIndex = () => {
     const lessonParam = searchParams.get('lesson');
@@ -121,7 +124,7 @@ function LearnView() {
 
   return (
     <div className="h-[calc(100vh-theme(spacing.16))]">
-       <ResizablePanelGroup direction="horizontal" className="w-full h-full">
+       <ResizablePanelGroup direction={isMobile ? "vertical" : "horizontal"} className="w-full h-full">
         <ResizablePanel defaultSize={50}>
             <ScrollArea className="h-full">
                 <div className="p-4 md:p-8">
