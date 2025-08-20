@@ -16,7 +16,7 @@ export async function generateCode(prompt: GenerateCodeInput): Promise<GenerateC
 
 const generationPrompt = ai.definePrompt({
   name: 'generateCodePrompt',
-  input: { schema: z.object({ userInput: GenerateCodeInputSchema }) },
+  input: { schema: GenerateCodeInputSchema },
   output: { schema: GenerateCodeOutputSchema },
   prompt: `
     You are an expert web developer who specializes in creating simple, single-file web applications.
@@ -30,7 +30,7 @@ const generationPrompt = ai.definePrompt({
     - The generated code should be simple, clean, and directly executable by a browser.
     - Fulfill the user's request as described in the prompt.
 
-    User Prompt: {{{userInput}}}
+    User Prompt: {{{input}}}
   `,
 });
 
@@ -41,7 +41,7 @@ const generateCodeFlow = ai.defineFlow(
     outputSchema: GenerateCodeOutputSchema,
   },
   async (prompt) => {
-    const { output } = await generationPrompt({ userInput: prompt });
+    const { output } = await generationPrompt(prompt);
     return output!;
   }
 );
