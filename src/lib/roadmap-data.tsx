@@ -1,3 +1,4 @@
+
 import type { RoadmapIcon } from "@/components/shared/roadmap-icon";
 
 export type RoadmapItem = {
@@ -489,6 +490,7 @@ const recipeSchema = z.object({
     subtitle: "Connecting AI to your UI",
     description: "Call your Genkit flow from a React component and display the results to the user.",
     icon: "BrainCircuit",
+    technologies: ["React", "Genkit"],
     hidePreview: true,
     sampleCode: {
       "JavaScript": `// In a React component:
