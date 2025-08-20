@@ -8,6 +8,7 @@
 
 import {ai} from '@/ai/genkit';
 import { GenerateCodeInput, GenerateCodeInputSchema, GenerateCodeOutput, GenerateCodeOutputSchema } from './schemas';
+import {z} from 'genkit';
 
 export async function generateCode(prompt: GenerateCodeInput): Promise<GenerateCodeOutput> {
   return generateCodeFlow(prompt);
@@ -15,7 +16,7 @@ export async function generateCode(prompt: GenerateCodeInput): Promise<GenerateC
 
 const generationPrompt = ai.definePrompt({
   name: 'generateCodePrompt',
-  input: { schema: GenerateCodeInputSchema },
+  input: { schema: z.object({ input: GenerateCodeInputSchema }) },
   output: { schema: GenerateCodeOutputSchema },
   prompt: `
     You are an expert web developer who specializes in creating simple, single-file web applications.
