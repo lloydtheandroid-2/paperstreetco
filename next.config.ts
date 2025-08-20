@@ -18,9 +18,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  env: {
-    FIREBASE_EMULATOR_HOST: '127.0.0.1',
-  }
 };
 
 export default nextConfig;

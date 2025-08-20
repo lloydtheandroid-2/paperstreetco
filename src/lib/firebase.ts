@@ -4,7 +4,7 @@ import { getAuth, type Auth, connectAuthEmulator } from 'firebase/auth';
 const firebaseConfig = {
   "projectId": "the-soapbox-d4c6q",
   "appId": "1:386326789588:web:4e7b2ce73e4453806d6a41",
-  "storageBucket": "the-soapbox-d4c6q.firebasestorage.app",
+  "storageBucket": "the-soapbox-d4c6q.appspot.com",
   "apiKey": "AIzaSyC7A5NooTFhxkv-M-yXfHcdMaZtUMj-Am0",
   "authDomain": "the-soapbox-d4c6q.firebaseapp.com",
   "messagingSenderId": "386326789588"
@@ -22,9 +22,8 @@ const auth: Auth = getAuth(app);
 
 // Connect to Auth Emulator in development
 if (process.env.NODE_ENV === 'development') {
-  // Use the host from the environment variable, or default to 127.0.0.1
-  const host = process.env.FIREBASE_EMULATOR_HOST || '127.0.0.1';
-  connectAuthEmulator(auth, `http://${host}:9099`, { disableWarnings: true });
+  // When running locally, use the Auth Emulator
+  connectAuthEmulator(auth, `http://127.0.0.1:9099`, { disableWarnings: true });
 }
 
 export { app, auth };
