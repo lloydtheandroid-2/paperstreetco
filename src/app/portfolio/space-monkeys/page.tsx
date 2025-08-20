@@ -1,39 +1,136 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
 
-export default function SpaceMonkeysPage() {
+'use client';
+
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowLeft, Share2, Sparkles, Loader } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import React from 'react';
+import { generateCode } from '@/ai/flows/generate-code-flow';
+
+export default function SandboxPage() {
+  const { toast } = useToast();
+  const sandboxName = "Space Monkeys";
+
+  const [editorContent, setEditorContent] = React.useState('');
+  const [previewContent, setPreviewContent] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const handleShare = () => {
+    if (typeof window !== 'undefined') {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        toast({
+          title: "Link Copied!",
+          description: "Sandbox URL has been copied to your clipboard.",
+        });
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+        toast({
+          title: "Error",
+          description: "Could not copy link to clipboard.",
+          variant: "destructive",
+        });
+      });
+    }
+  };
+  
+  const handleGenerate = async () => {
+    if (!editorContent) {
+      toast({
+        title: "Editor is empty",
+        description: "Please describe the app you want to build.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setIsLoading(true);
+    setPreviewContent('');
+    try {
+      const generatedHtml = await generateCode(editorContent);
+      setPreviewContent(generatedHtml);
+    } catch (error) {
+      console.error('Failed to generate code: ', error);
+      toast({
+        title: "Generation Failed",
+        description: "The AI failed to generate code. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div>
-      <h1 className="text-4xl font-bold mb-8">Space Monkeys</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <Card>
+    <div className="flex flex-col h-[calc(100vh-81px)] p-4 md:p-6 lg:p-8">
+      <header className="flex items-center justify-between mb-6 animate-in fade-in duration-500">
+        <div className="flex items-center gap-4">
+          <h1 className="text-2xl md:text-3xl font-bold font-headline">
+            {sandboxName} Sandbox
+          </h1>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={handleShare}>
+            <Share2 className="mr-2 h-4 w-4" />
+            Share
+          </Button>
+          <Button onClick={handleGenerate} disabled={isLoading}>
+            {isLoading ? (
+              <Loader className="animate-spin mr-2"/>
+            ) : (
+              <Sparkles className="mr-2 h-4 w-4" />
+            )}
+            Generate
+          </Button>
+        </div>
+      </header>
+      <main className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
+        <Card className="flex flex-col border-dashed border-2">
           <CardHeader>
-            <Image src="https://placehold.co/600x400.png" width={600} height={400} alt="Portfolio Item 1" className="rounded-t-lg" data-ai-hint="space night" />
+            <CardTitle>Editor</CardTitle>
           </CardHeader>
-          <CardContent className="pt-4">
-            <CardTitle>Celestial Navigation</CardTitle>
-            <p className="text-muted-foreground mt-2">Charting courses through the final frontier.</p>
+          <CardContent className="flex-1 flex flex-col p-2 pt-0">
+            <Textarea
+              placeholder="Describe what you want to build. For example: a simple pong game with a black background."
+              className="flex-1 w-full h-full resize-none bg-transparent border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+              aria-label="Code Editor"
+              value={editorContent}
+              onChange={(e) => setEditorContent(e.target.value)}
+              disabled={isLoading}
+            />
           </CardContent>
         </Card>
-        <Card>
+        <Card className="flex flex-col border-dashed border-2">
           <CardHeader>
-            <Image src="https://placehold.co/600x400.png" width={600} height={400} alt="Portfolio Item 2" className="rounded-t-lg" data-ai-hint="rocket launch" />
+            <CardTitle>Preview</CardTitle>
           </CardHeader>
-          <CardContent className="pt-4">
-            <CardTitle>Launch Systems</CardTitle>
-            <p className="text-muted-foreground mt-2">Advanced propulsion for a new era of exploration.</p>
+          <CardContent className="flex-1">
+            {isLoading && (
+              <div className="w-full h-full flex items-center justify-center bg-transparent rounded-md">
+                <div className="text-center">
+                  <Loader className="h-8 w-8 animate-spin mx-auto mb-2" />
+                  <p className="text-muted-foreground">The AI is building... this may take a moment.</p>
+                </div>
+              </div>
+            )}
+            {!isLoading && !previewContent && (
+              <div className="w-full h-full flex items-center justify-center bg-transparent rounded-md">
+                <p className="text-muted-foreground">Your app preview will appear here.</p>
+              </div>
+            )}
+            {previewContent && (
+               <iframe
+                srcDoc={previewContent}
+                title="Preview"
+                sandbox="allow-scripts"
+                className="w-full h-full border-0"
+              />
+            )}
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader>
-            <Image src="https://placehold.co/600x400.png" width={600} height={400} alt="Portfolio Item 3" className="rounded-t-lg" data-ai-hint="mission control" />
-          </CardHeader>
-          <CardContent className="pt-4">
-            <CardTitle>Ground Control</CardTitle>
-            <p className="text-muted-foreground mt-2">The nerve center of our most ambitious projects.</p>
-          </CardContent>
-        </Card>
-      </div>
+      </main>
     </div>
   );
 }
