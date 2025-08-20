@@ -1,4 +1,4 @@
-# Paper Street Soapbox
+# The Soapbox
 
 A progressive web application (PWA) built with Next.js and Firebase. It provides distinct sandbox environments for developing and testing simple web applications, inspired by the film "Fight Club." The application is designed to be installable, work offline, and provide a fast, seamless user experience.
 

@@ -9,11 +9,8 @@ export default function Home() {
           {/* Left Column: Text Content & CTA */}
           <div className="flex flex-col items-start text-left animate-in fade-in slide-in-from-left-8 duration-1000">
             <h1 className="text-5xl md:text-6xl font-bold font-headline text-foreground">
-              Paper Street Co.
-            </h1>
-            <h2 className="text-4xl md:text-5xl font-bold font-headline text-muted-foreground mb-4">
               The Soapbox
-            </h2>
+            </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8">
               The first rule of Soapbox is: you DO talk about Soapbox.
             </p>
@@ -24,7 +21,7 @@ export default function Home() {
           <div className="hidden md:flex justify-center items-center animate-in fade-in slide-in-from-right-8 duration-1000">
             <Image
               src="/assets/logo.png"
-              alt="Paper Street Soapbox Logo"
+              alt="The Soapbox Logo"
               width={500}
               height={500}
               className="rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300"

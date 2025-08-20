@@ -32,7 +32,7 @@ export default function Header() {
     <header className="flex items-center justify-between p-4 border-b">
       <Link href="/" className="flex items-center gap-2">
         <Image src="/assets/logo.png" alt="Company Logo" width={96} height={96} />
-        <span className="font-bold text-lg">Paper Street Co.</span>
+        <span className="font-bold text-lg">The Soapbox</span>
       </Link>
       
       {/* Desktop Menu */}

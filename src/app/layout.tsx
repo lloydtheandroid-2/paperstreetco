@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from '@/components/auth/auth-provider';
 
 export const metadata: Metadata = {
-  title: 'Paper Street Soapbox',
+  title: 'The Soapbox',
   description: 'A sandbox PWA to build and test simple web applications.',
   manifest: '/manifest.json',
 };
