@@ -1,4 +1,18 @@
-export const roadmapItems = [
+import type { RoadmapIcon } from "@/components/shared/roadmap-icon";
+
+export type RoadmapItem = {
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: React.ComponentProps<typeof RoadmapIcon>['icon'];
+  technologies: string[];
+  hidePreview?: boolean;
+  sampleCode: {
+    [key: string]: string;
+  };
+};
+
+export const roadmapItems: RoadmapItem[] = [
   // Milestone 0: First Principles (Coding Fundamentals)
   {
     title: "Rule #0: First Principles",

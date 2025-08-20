@@ -99,7 +99,7 @@ function LearnViewContent() {
   const availableLanguages = lesson ? Object.keys(lesson.sampleCode) : [];
   const [selectedLanguage, setSelectedLanguage] = React.useState(availableLanguages[0]);
 
-  const [userCode, setUserCode] = React.useState(lesson ? lesson.sampleCode[selectedLanguage] || '' : '');
+  const [userCode, setUserCode] = React.useState(lesson && lesson.sampleCode ? lesson.sampleCode[selectedLanguage as any] || '' : '');
   
   const isCompleted = completedLessons.includes(currentLessonIndex);
 
@@ -113,7 +113,7 @@ function LearnViewContent() {
       if (!languages.includes(selectedLanguage)) {
         setSelectedLanguage(currentLang);
       }
-      setUserCode(newLesson.sampleCode[currentLang] || '');
+      setUserCode(newLesson.sampleCode[currentLang as any] || '');
       // Update URL without navigating
       const newUrl = `${window.location.pathname}?lesson=${lessonIndex}`;
       window.history.replaceState({ path: newUrl }, '', newUrl);
@@ -122,8 +122,8 @@ function LearnViewContent() {
   }, [searchParams, getInitialLessonIndex]);
 
   React.useEffect(() => {
-    if (lesson) {
-      setUserCode(lesson.sampleCode[selectedLanguage] || '');
+    if (lesson && lesson.sampleCode) {
+      setUserCode(lesson.sampleCode[selectedLanguage as any] || '');
     }
   }, [selectedLanguage, lesson]);
 
@@ -195,7 +195,7 @@ function LearnViewContent() {
                 </CardHeader>
                 <CardContent>
                 <div className="bg-muted p-4 rounded-md text-sm text-muted-foreground">
-                    <pre><code>{lesson.sampleCode[selectedLanguage]}</code></pre>
+                    <pre><code>{lesson.sampleCode[selectedLanguage as any]}</code></pre>
                 </div>
                 </CardContent>
             </Card>
