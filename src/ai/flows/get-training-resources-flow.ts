@@ -16,8 +16,8 @@ import {z} from 'zod';
 export async function getTrainingResources(
   technologies: string[]
 ): Promise<TrainingResource[]> {
-  const {output} = await trainingResourcesFlow({technologies});
-  return output?.resources || [];
+  const {resources} = await trainingResourcesFlow({technologies});
+  return resources || [];
 }
 
 const trainingResourcesPrompt = ai.definePrompt({
