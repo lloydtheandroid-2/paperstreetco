@@ -9,8 +9,8 @@ import { ai } from '@/ai/genkit';
 import { z } from 'zod';
 
 export async function getUserCount(): Promise<number> {
-    const { output } = await userCountFlow();
-    return output || 0;
+    const count = await userCountFlow();
+    return count || 0;
 }
 
 const userCountFlow = ai.defineFlow(
