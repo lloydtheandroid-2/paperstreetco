@@ -62,7 +62,7 @@ export default function Home() {
           </Card>
         </div>
 
-        <div className="mt-8 w-full md:w-1/3">
+        <div className="mt-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:w-2/3">
            <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-accent">Support Groups</CardTitle>
@@ -71,6 +71,17 @@ export default function Home() {
             <CardContent>
               <Link href="/blog" passHref>
                 <Button className="w-full">Enter this Soapbox</Button>
+              </Link>
+            </CardContent>
+          </Card>
+          <Card className="bg-card/50 hover:bg-card/100 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-accent">Project Roadmap</CardTitle>
+              <CardDescription>Let go of the wheel.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/roadmap" passHref>
+                <Button className="w-full">View the Path</Button>
               </Link>
             </CardContent>
           </Card>
