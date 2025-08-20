@@ -18,8 +18,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from './auth-provider';
 import { getFirebaseAuth } from '@/lib/firebase';
-import Link from 'next/link';
-import LoginButton from './login-button';
 
 export default function UserNav() {
   const { user, loading } = useAuth();
@@ -28,12 +26,8 @@ export default function UserNav() {
     getFirebaseAuth().signOut();
   };
   
-  if (loading) {
+  if (loading || !user) {
     return null;
-  }
-
-  if (!user) {
-    return <LoginButton />;
   }
 
   return (

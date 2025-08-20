@@ -1,7 +1,5 @@
-
-import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import Link from 'next/link';
+import StartButton from '@/components/auth/start-button';
 
 export default function Home() {
   return (
@@ -19,11 +17,7 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-muted-foreground mb-8">
               The first rule of Soapbox is: you DO talk about Soapbox.
             </p>
-            <Link href="/learn" passHref>
-              <Button size="lg" className="text-lg py-7 px-8">
-                Start Making Soap
-              </Button>
-            </Link>
+            <StartButton />
           </div>
 
           {/* Right Column: Visual Element */}
