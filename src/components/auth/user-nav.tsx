@@ -17,13 +17,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from './auth-provider';
-import { getFirebaseAuth } from '@/lib/firebase';
+import { auth } from '@/lib/firebase';
 
 export default function UserNav() {
   const { user, loading } = useAuth();
   
   const handleLogout = () => {
-    getFirebaseAuth().signOut();
+    auth.signOut();
   };
   
   if (loading || !user) {

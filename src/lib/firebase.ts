@@ -11,16 +11,17 @@ const firebaseConfig = {
   "messagingSenderId": "386326789588"
 };
 
-function getFirebaseApp(): FirebaseApp {
-  if (!getApps().length) {
-    return initializeApp(firebaseConfig);
+function initializeFirebaseApp(): FirebaseApp {
+  if (getApps().length) {
+    return getApp();
   }
-  return getApp();
+  return initializeApp(firebaseConfig);
 }
 
+export const app: FirebaseApp = initializeFirebaseApp();
+export const auth: Auth = getAuth(app);
+
+// This function is now deprecated but kept for compatibility in case it's used elsewhere.
 export function getFirebaseAuth(): Auth {
-    return getAuth(getFirebaseApp());
+    return auth;
 }
-
-export const app = getFirebaseApp();
-export const auth = getFirebaseAuth();
