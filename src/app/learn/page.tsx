@@ -15,18 +15,23 @@ import { useToast } from '@/hooks/use-toast';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-
-// A simple "preview" component that uses an iframe to render user HTML
-function CodePreview({ code }: { code: string }) {
+// A simple "preview" component that uses an iframe to render user HTML/JS
+function CodePreview({ code, language }: { code: string, language: string }) {
   const [iframeBody, setIframeBody] = React.useState('');
 
   React.useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setIframeBody(code);
-    }, 500);
-    return () => clearTimeout(timeoutId);
-  }, [code]);
+    // Only attempt to render if the language is JavaScript, which can be run in the browser
+    if (language.toLowerCase() === 'javascript') {
+      const timeoutId = setTimeout(() => {
+        setIframeBody(code);
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    } else {
+      setIframeBody('');
+    }
+  }, [code, language]);
 
   const srcDoc = `
     <html>
@@ -57,6 +62,7 @@ function CodePreview({ code }: { code: string }) {
             document.body.innerHTML = '<pre style="color: #f87171;">' + e + '</pre>';
           }
         </script>
+        ${language.toLowerCase() !== 'javascript' ? `<div style="text-align: center; padding-top: 2rem; font-style: italic; color: #a1a1aa;">Live preview is only available for JavaScript/HTML.</div>` : ''}
       </body>
     </html>
   `;
@@ -89,21 +95,27 @@ function LearnView() {
         return lessonNum;
       }
     }
-    // Start at the lesson after the last completed one by default
     return completedLessons.length < roadmapItems.length ? completedLessons.length : 0;
   };
 
   const [currentLessonIndex, setCurrentLessonIndex] = React.useState(getInitialLessonIndex);
   const lesson = roadmapItems[currentLessonIndex];
-  const [userCode, setUserCode] = React.useState(lesson?.sampleCode || '');
+  const availableLanguages = Object.keys(lesson.sampleCode);
+  const [selectedLanguage, setSelectedLanguage] = React.useState(availableLanguages[0]);
 
+  const [userCode, setUserCode] = React.useState(lesson.sampleCode[selectedLanguage] || '');
+  
   const isCompleted = completedLessons.includes(currentLessonIndex);
 
   React.useEffect(() => {
     const lessonIndex = getInitialLessonIndex();
     setCurrentLessonIndex(lessonIndex);
-    if (roadmapItems[lessonIndex]) {
-      setUserCode(roadmapItems[lessonIndex].sampleCode || '');
+    const newLesson = roadmapItems[lessonIndex];
+    if (newLesson) {
+      const languages = Object.keys(newLesson.sampleCode);
+      const currentLang = languages.includes(selectedLanguage) ? selectedLanguage : languages[0];
+      setSelectedLanguage(currentLang);
+      setUserCode(newLesson.sampleCode[currentLang] || '');
       // Update URL without navigating
       const newUrl = `${window.location.pathname}?lesson=${lessonIndex}`;
       window.history.replaceState({ path: newUrl }, '', newUrl);
@@ -111,9 +123,14 @@ function LearnView() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
+  React.useEffect(() => {
+    if (lesson) {
+      setUserCode(lesson.sampleCode[selectedLanguage] || '');
+    }
+  }, [selectedLanguage, lesson]);
+
+
   if (!lesson) {
-    // This can happen if the query param is invalid initially.
-    // getInitialLessonIndex will correct it on the next render.
     return (
        <div className="h-[calc(100vh-theme(spacing.16))] flex items-center justify-center">
          <p>Loading lesson...</p>
@@ -166,6 +183,14 @@ function LearnView() {
                         <h1 className="text-4xl font-bold">{lesson.subtitle}</h1>
                         <p className="text-muted-foreground mt-2">{lesson.description}</p>
                     </div>
+                    
+                    <Tabs value={selectedLanguage} onValueChange={setSelectedLanguage} className="mb-4">
+                        <TabsList>
+                          {availableLanguages.map(lang => (
+                             <TabsTrigger key={lang} value={lang}>{lang}</TabsTrigger>
+                          ))}
+                        </TabsList>
+                    </Tabs>
 
                     <Card className="mb-8">
                         <CardHeader>
@@ -179,7 +204,7 @@ function LearnView() {
                         </CardHeader>
                         <CardContent>
                         <div className="bg-muted p-4 rounded-md text-sm text-muted-foreground">
-                            <pre><code>{lesson.sampleCode}</code></pre>
+                            <pre><code>{lesson.sampleCode[selectedLanguage]}</code></pre>
                         </div>
                         </CardContent>
                     </Card>
@@ -226,7 +251,7 @@ function LearnView() {
                 <h2 className="text-lg font-bold">Preview</h2>
              </div>
              <div className="flex-1">
-                <CodePreview code={userCode} />
+                <CodePreview code={userCode} language={selectedLanguage} />
              </div>
            </div>
         </ResizablePanel>
@@ -260,5 +285,3 @@ function LearnPage() {
 }
 
 export default LearnPage;
-
-    
