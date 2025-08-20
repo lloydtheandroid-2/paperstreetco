@@ -34,45 +34,9 @@ export default function Home() {
               <CardDescription>somebody spoke, didn't they?</CardDescription>
             </CardHeader>
             <CardContent>
-                <Link href="/dashboard" passHref>
-                  <Button className="w-full">Enter Dashboard</Button>
+                <Link href="/learn" passHref>
+                  <Button className="w-full">Start Making Soap</Button>
                 </Link>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="mt-8 w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:w-full">
-           <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><School />Learning Path</CardTitle>
-              <CardDescription>Start your journey.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link href="/learn" passHref>
-                <Button variant="secondary" className="w-full">Begin Lesson 1</Button>
-              </Link>
-            </CardContent>
-          </Card>
-          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Users />Support Group</CardTitle>
-              <CardDescription>A place to let it all out.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link href="/blog" passHref>
-                <Button variant="secondary" className="w-full">Don't be a tourist</Button>
-              </Link>
-            </CardContent>
-          </Card>
-          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><GitMerge />Project Roadmap</CardTitle>
-              <CardDescription>Let go of the wheel.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link href="/roadmap" passHref>
-                <Button variant="secondary" className="w-full">Embrace the Unknown</Button>
-              </Link>
             </CardContent>
           </Card>
         </div>
