@@ -110,7 +110,7 @@ export default function RoadmapPage() {
                     <CardContent>
                       <p className="mb-4">{item.description}</p>
                       <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                        {item.technologies.map(tech => (
+                        {item.technologies && item.technologies.map(tech => (
                           <div key={tech} className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-md">{tech}</div>
                         ))}
                       </div>
