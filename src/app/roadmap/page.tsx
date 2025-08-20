@@ -1,21 +1,22 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code, Database, BrainCircuit, Cloud, Milestone, ShieldCheck, Wind } from "lucide-react";
+import { Code, Database, BrainCircuit, Cloud, Milestone, ShieldCheck, Gem } from "lucide-react";
 
 export default function RoadmapPage() {
   const roadmapItems = [
     {
-      title: "Rule #1: The Foundation",
-      subtitle: "If it's your first night, you have to code.",
-      description: "You start with the fundamentals. Structure with HTML, style with CSS, and bring it to life with JavaScript. We'll use modern tools like React and Next.js, styled with Tailwind and ShadCN, because the things you own, end up owning you. Master the basics first.",
+      title: "Rule #1: You DO Talk About Soapbox",
+      subtitle: "The Foundation",
+      description: "First, you have to talk about it. Spread the word. You start with the fundamentals. Structure with HTML, style with CSS, and bring it to life with JavaScript. We use modern tools like React and Next.js, styled with Tailwind and ShadCN, because the things you own, end up owning you.",
       icon: <Code className="w-8 h-8 text-accent" />,
       technologies: ["HTML5", "CSS3", "JavaScript", "React", "Next.js", "Tailwind CSS", "ShadCN UI"],
     },
     {
-      title: "Rule #2: Build the Machine",
-      subtitle: "Full-Stack & Databases",
-      description: "A front-end is just a mask. To have real impact, you need a brain behind it. We connect our apps to full-stack backends and persistent data stores. This is where your project develops a memory.",
+      title: "Rule #2: If It's Your First Night, You HAVE to Code",
+      subtitle: "Build the Machine",
+      description: "A front-end is just a mask. To have real impact, you need a brain behind it. We connect our apps to full-stack backends and persistent data stores. We also explore immersive 3D experiences with Three.js. This is where your project develops a memory and a new dimension.",
       icon: <Database className="w-8 h-8 text-accent" />,
-      technologies: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs"],
+      technologies: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs", "Three.js"],
     },
     {
       title: "Rule #3: Achieve Self-Awareness",
@@ -55,8 +56,8 @@ export default function RoadmapPage() {
           {roadmapItems.map((item, index) => (
             <div key={index} className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8 relative">
               
-              {/* Card Left */}
-              <div className={`md:col-start-1 ${index % 2 !== 0 ? 'md:col-start-3' : ''}`}>
+              {/* Card Left or Right */}
+              <div className={`md:col-start-1 ${index % 2 !== 0 ? 'md:col-start-3' : ''} ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                  <Card>
                   <CardHeader>
                     <div className={`flex items-center gap-4 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
@@ -67,7 +68,7 @@ export default function RoadmapPage() {
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent className="text-left">
+                  <CardContent>
                     <p className="mb-4">{item.description}</p>
                     <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
                       {item.technologies.map(tech => (
