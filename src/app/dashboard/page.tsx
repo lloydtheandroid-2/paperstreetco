@@ -12,17 +12,46 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { useAuth } from '@/components/auth/auth-provider';
 import { Skeleton } from '@/components/ui/skeleton';
 
+// In a real app, this state would be stored in a database.
+// For this prototype, we'll manage it on the client.
+export const useProgressStore = (() => {
+  let completed: number[] = [];
+  let listeners: React.Dispatch<React.SetStateAction<number[]>>[] = [];
+
+  const setCompleted = (newCompleted: number[] | ((prev: number[]) => number[])) => {
+    if (typeof newCompleted === 'function') {
+      completed = newCompleted(completed);
+    } else {
+      completed = newCompleted;
+    }
+    listeners.forEach(l => l(completed));
+  };
+  
+  const useProgress = () => {
+    const [state, setState] = React.useState(completed);
+    React.useEffect(() => {
+        listeners.push(setState);
+        return () => {
+            listeners = listeners.filter(l => l !== setState);
+        };
+    }, []);
+    return [state, setCompleted] as const;
+  };
+
+  return useProgress;
+})();
+
+
 export default function DashboardPage() {
   const { user, loading } = useAuth();
+  const [completedLessons] = useProgressStore();
   
-  // --- Mock Progress Data ---
-  // In a real app, this would come from a database.
-  const completedLessons = 2; // Let's assume the user completed the first 2 lessons.
+  const completedCount = completedLessons.length;
   const totalLessons = roadmapItems.length;
-  const progressPercentage = (completedLessons / totalLessons) * 100;
+  const progressPercentage = (completedCount / totalLessons) * 100;
   
-  const lastCompletedLesson = completedLessons > 0 ? roadmapItems[completedLessons - 1] : null;
-  const nextLesson = completedLessons < totalLessons ? roadmapItems[completedLessons] : null;
+  const lastCompletedLesson = completedCount > 0 ? roadmapItems[completedCount - 1] : null;
+  const nextLesson = completedCount < totalLessons ? roadmapItems[completedCount] : null;
 
   if (loading) {
     return (
@@ -59,7 +88,7 @@ export default function DashboardPage() {
       <Card className="mb-8 bg-card/50 border-border/50">
         <CardHeader>
           <CardTitle>Your Roadmap Progress</CardTitle>
-          <CardDescription>{completedLessons} of {totalLessons} rules mastered.</CardDescription>
+          <CardDescription>{completedCount} of {totalLessons} rules mastered.</CardDescription>
         </CardHeader>
         <CardContent>
           <Progress value={progressPercentage} className="h-4" />

@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -5,16 +6,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { roadmapItems } from '@/lib/roadmap-data';
-import { Code, Eye } from 'lucide-react';
+import { Code, Eye, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useProgressStore } from '../dashboard/page';
+import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 // A simple "preview" component that uses an iframe to render user HTML
 function CodePreview({ code }: { code: string }) {
   const [iframeBody, setIframeBody] = React.useState('');
 
   React.useEffect(() => {
-    // A simple debounce to avoid re-rendering the iframe on every keystroke
     const timeoutId = setTimeout(() => {
       setIframeBody(code);
     }, 500);
@@ -34,16 +37,60 @@ function CodePreview({ code }: { code: string }) {
 }
 
 export default function LearnPage() {
-  // For now, we'll just show the first lesson.
-  const [lesson, setLesson] = React.useState(roadmapItems[0]);
+  const router = useRouter();
+  const { toast } = useToast();
+  const [completedLessons, setCompletedLessons] = useProgressStore();
+
+  // Start at the lesson after the last completed one
+  const [currentLessonIndex, setCurrentLessonIndex] = React.useState(completedLessons.length);
+  const lesson = roadmapItems[currentLessonIndex];
   const [userCode, setUserCode] = React.useState(lesson.sampleCode || '');
+
+  const isCompleted = completedLessons.includes(currentLessonIndex);
+
+  React.useEffect(() => {
+    setUserCode(roadmapItems[currentLessonIndex].sampleCode || '');
+  }, [currentLessonIndex]);
+
+  const handleNext = () => {
+    if (currentLessonIndex < roadmapItems.length - 1) {
+      setCurrentLessonIndex(currentLessonIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentLessonIndex > 0) {
+      setCurrentLessonIndex(currentLessonIndex - 1);
+    }
+  };
+
+  const handleComplete = () => {
+    if (!isCompleted) {
+        setCompletedLessons(prev => [...new Set([...prev, currentLessonIndex])].sort((a,b) => a-b));
+        toast({
+            title: "Rule Mastered!",
+            description: `You've completed: "${lesson.subtitle}"`,
+        });
+    }
+
+    if (currentLessonIndex === roadmapItems.length - 1) {
+        // Last lesson completed
+        toast({
+            title: "Roadmap Complete!",
+            description: "You've mastered all the rules. It's time to build.",
+        });
+        router.push('/dashboard');
+    } else {
+        handleNext();
+    }
+  };
 
   return (
     <div className="h-[calc(100vh-theme(spacing.16))]">
        <ResizablePanelGroup direction="horizontal" className="w-full h-full">
         <ResizablePanel defaultSize={50}>
-            <ScrollArea className="h-full p-4 md:p-8">
-                <div className="max-w-3xl mx-auto">
+            <ScrollArea className="h-full">
+                <div className="p-4 md:p-8">
                     <div className="mb-8">
                         <p className="text-sm text-primary font-semibold mb-1">{lesson.title}</p>
                         <h1 className="text-4xl font-bold">{lesson.subtitle}</h1>
@@ -57,7 +104,7 @@ export default function LearnPage() {
                             <span>Example Code</span>
                         </CardTitle>
                         <CardDescription>
-                            Here's a starting point. You can edit this in the editor below.
+                            This is your starting point. Modify it in the editor below to experiment.
                         </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -67,14 +114,28 @@ export default function LearnPage() {
                         </CardContent>
                     </Card>
 
-                    <div>
-                        <h2 className="text-2xl font-bold mb-4">Your Turn</h2>
+                    <div className="mb-8">
+                        <h2 className="text-2xl font-bold mb-4">Your Editor</h2>
                         <Textarea
                             value={userCode}
                             onChange={(e) => setUserCode(e.target.value)}
                             placeholder="Write your code here..."
                             className="min-h-[200px] bg-card text-card-foreground font-mono"
                         />
+                    </div>
+
+                     <div className="flex items-center justify-between">
+                        <Button variant="outline" onClick={handlePrev} disabled={currentLessonIndex === 0}>
+                            <ChevronLeft />
+                            Previous
+                        </Button>
+                        <div className="text-sm text-muted-foreground">
+                            Rule {currentLessonIndex + 1} of {roadmapItems.length}
+                        </div>
+                        <Button onClick={handleComplete}>
+                            {isCompleted ? 'Completed' : 'Mark as Complete'}
+                            <Check className={`ml-2 ${isCompleted ? 'opacity-100' : 'opacity-50'}`} />
+                        </Button>
                     </div>
                 </div>
             </ScrollArea>
