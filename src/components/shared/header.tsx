@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Bomb, Rocket, Wrench } from 'lucide-react';
 import UserNav from '@/components/auth/user-nav';
 import { useAuth } from '@/components/auth/auth-provider';
+import MemberCount from './member-count';
 
 const NavMenu = () => {
   const { user } = useAuth();
@@ -30,10 +31,15 @@ const NavMenu = () => {
 export default function Header() {
   return (
     <header className="flex items-center justify-between p-4 border-b">
-      <Link href="/" className="flex items-center gap-2">
-        <Image src="/assets/logo.png" alt="Company Logo" width={96} height={96} />
-        <span className="font-bold text-lg">The Soapbox</span>
-      </Link>
+      <div className="flex items-center gap-4">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/assets/logo.png" alt="Company Logo" width={96} height={96} />
+          <span className="font-bold text-lg">The Soapbox</span>
+        </Link>
+        <div className="hidden md:block">
+         <MemberCount />
+        </div>
+      </div>
       
       {/* Desktop Menu */}
       <nav className="hidden md:flex items-center gap-4">

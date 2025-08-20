@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import StartButton from '@/components/auth/start-button';
+import MemberCount from '@/components/shared/member-count';
 
 export default function Home() {
   return (
@@ -11,9 +12,12 @@ export default function Home() {
             <h1 className="text-5xl md:text-6xl font-bold font-headline text-foreground">
               The Soapbox
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-4">
               The first rule of Soapbox is: you DO talk about Soapbox.
             </p>
+            <div className="mb-8">
+              <MemberCount />
+            </div>
             <StartButton />
           </div>
 
