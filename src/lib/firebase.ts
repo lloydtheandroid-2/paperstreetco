@@ -16,7 +16,10 @@ const firebaseConfig = {
 let app: FirebaseApp;
 let auth: Auth;
 
-if (getApps().length === 0) {
+if (!getApps().length) {
+  if (!firebaseConfig.apiKey) {
+    throw new Error('Missing Firebase API Key');
+  }
   app = initializeApp(firebaseConfig);
 } else {
   app = getApp();
