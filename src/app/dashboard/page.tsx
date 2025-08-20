@@ -95,16 +95,22 @@ export default function DashboardPage() {
                           <div
                             className={cn(
                               "rounded-full flex items-center justify-center border-2 transition-all duration-300",
-                              isMilestone ? "w-10 h-10" : "w-6 h-6",
+                              isMilestone ? "w-10 h-10" : "w-4 h-4",
                               isCompleted ? "bg-primary border-primary" : "bg-muted border-border",
-                              isCurrent && "border-primary scale-110 shadow-lg shadow-primary/20",
+                              isCurrent && !isMilestone && "border-primary scale-125",
+                              isCurrent && isMilestone && "border-primary scale-110 shadow-lg shadow-primary/20",
                               !isCompleted && !isCurrent && "hover:border-primary/50"
                             )}
                           >
-                            {isCompleted ? (
-                              <Check className={cn("text-primary-foreground", isMilestone ? "w-6 h-6" : "w-4 h-4")} />
+                            {isMilestone ? (
+                                isCompleted ? (
+                                    <Check className="w-6 h-6 text-primary-foreground" />
+                                ) : (
+                                    <Circle className={cn(isCurrent ? 'text-primary' : 'text-muted-foreground', "w-4 h-4")}/>
+                                )
                             ) : (
-                               <Circle className={cn(isCurrent ? 'text-primary' : 'text-muted-foreground', isMilestone ? "w-4 h-4" : "w-2 h-2")}/>
+                                // This is a tiny dot
+                                isCompleted && <div className="w-2 h-2 rounded-full bg-primary-foreground"></div>
                             )}
                           </div>
                         </Link>
@@ -194,3 +200,4 @@ export default function DashboardPage() {
     </TooltipProvider>
   );
 }
+
