@@ -3,9 +3,9 @@ import { getAuth, type Auth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD1FGmC2Xquifxfzrm-a-lg7MsOZrhOtDk",
-  authDomain: "paper-street-soapbox.firebaseapp.com",
-  projectId: "paper-street-soapbox",
-  storageBucket: "paper-street-soapbox.firebasestorage.app",
+  authDomain: "paper-street-soapbox-84i9i.firebaseapp.com",
+  projectId: "paper-street-soapbox-84i9i",
+  storageBucket: "paper-street-soapbox-84i9i.appspot.com",
   messagingSenderId: "762380655759",
   appId: "1:762380655759:web:a9c1855b0308b713b824fa",
 };
