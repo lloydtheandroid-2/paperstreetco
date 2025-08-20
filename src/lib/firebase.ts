@@ -23,7 +23,7 @@ const auth: Auth = getAuth(app);
 // Connect to Auth Emulator in development
 if (process.env.NODE_ENV === 'development') {
   // When running locally, use the Auth Emulator
-  connectAuthEmulator(auth, `http://127.0.0.1:9099`, { disableWarnings: true });
+  // connectAuthEmulator(auth, `http://127.0.0.1:9099`, { disableWarnings: true });
 }
 
 export { app, auth };
