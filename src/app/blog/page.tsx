@@ -40,7 +40,7 @@ export default function BlogFaqPage() {
             <AccordionItem value="item-4">
               <AccordionTrigger>What are the ingredients in the soap?</AccordionTrigger>
               <AccordionContent>
-                That's proprietary. But rest assured, it is of the highest quality.
+                That's proprietary. But rest assured, it is of the highest quality, and sourced from the best customers.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
