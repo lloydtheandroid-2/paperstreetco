@@ -7,39 +7,10 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { roadmapItems } from "@/lib/roadmap-data";
 import Link from 'next/link';
-import { File, Folder, ChevronRight, CheckCircle, ArrowRight } from 'lucide-react';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { ChevronRight, CheckCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '@/components/auth/auth-provider';
 import { Skeleton } from '@/components/ui/skeleton';
-
-// In a real app, this state would be stored in a database.
-// For this prototype, we'll manage it on the client.
-export const useProgressStore = (() => {
-  let completed: number[] = [];
-  let listeners: React.Dispatch<React.SetStateAction<number[]>>[] = [];
-
-  const setCompleted = (newCompleted: number[] | ((prev: number[]) => number[])) => {
-    if (typeof newCompleted === 'function') {
-      completed = newCompleted(completed);
-    } else {
-      completed = newCompleted;
-    }
-    listeners.forEach(l => l(completed));
-  };
-  
-  const useProgress = () => {
-    const [state, setState] = React.useState(completed);
-    React.useEffect(() => {
-        listeners.push(setState);
-        return () => {
-            listeners = listeners.filter(l => l !== setState);
-        };
-    }, []);
-    return [state, setCompleted] as const;
-  };
-
-  return useProgress;
-})();
+import { useProgressStore } from './page';
 
 
 export default function DashboardPage() {
@@ -112,7 +83,7 @@ export default function DashboardPage() {
                 <p className="text-muted-foreground mt-1">{lastCompletedLesson.description}</p>
               </div>
             ) : (
-              <p className="text-muted-foreground">Your first fight awaits. It's time to start.</p>
+              <p className="text-muted-foreground">Your first fight awaits. It's only after you've lost everything that you're free to do anything.</p>
             )}
           </CardContent>
         </Card>
@@ -150,48 +121,6 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-      
-      {/* Sandbox Access */}
-      <Collapsible defaultOpen>
-        <CollapsibleTrigger className="flex items-center gap-2 text-lg font-semibold hover:underline">
-          <Folder className="w-5 h-5" />
-          Project Sandboxes
-        </CollapsibleTrigger>
-        <CollapsibleContent className="mt-4 animate-in fade-in-50">
-          <div className="grid md:grid-cols-3 gap-4">
-             <Link href="/portfolio/project-mayhem" passHref>
-              <Card className="hover:bg-muted/50 transition-colors h-full">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><File /> Project Mayhem</CardTitle>
-                </CardHeader>
-                 <CardContent>
-                  <CardDescription>Your space for radical ideas.</CardDescription>
-                </CardContent>
-              </Card>
-            </Link>
-             <Link href="/portfolio/space-monkeys" passHref>
-              <Card className="hover:bg-muted/50 transition-colors h-full">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><File /> Space Monkeys</CardTitle>
-                </CardHeader>
-                 <CardContent>
-                  <CardDescription>Your launchpad for ambitious projects.</CardDescription>
-                </CardContent>
-              </Card>
-            </Link>
-             <Link href="/portfolio/lous-basement" passHref>
-              <Card className="hover:bg-muted/50 transition-colors h-full">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><File /> Lou's Basement</CardTitle>
-                </CardHeader>
-                 <CardContent>
-                  <CardDescription>Where the real work happens.</CardDescription>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
     </div>
   );
 }
