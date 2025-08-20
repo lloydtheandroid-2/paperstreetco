@@ -28,13 +28,46 @@ function CodePreview({ code }: { code: string }) {
     return () => clearTimeout(timeoutId);
   }, [code]);
 
+  const srcDoc = `
+    <html>
+      <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+          body { 
+            background-color: #0c0a09; 
+            color: #fafaf9;
+            font-family: sans-serif;
+            padding: 1rem;
+          }
+        </style>
+      </head>
+      <body>
+        <script>
+          // Allow for both direct HTML and JS that writes to the document
+          try {
+            const originalCode = \`${iframeBody.replace(/`/g, '\\`')}\`;
+            // If the code is likely HTML, just write it.
+            if (originalCode.trim().startsWith('<')) {
+              document.body.innerHTML += originalCode;
+            } else {
+              // Otherwise, execute it as JS.
+              eval(originalCode);
+            }
+          } catch (e) {
+            document.body.innerHTML = '<pre style="color: #f87171;">' + e + '</pre>';
+          }
+        </script>
+      </body>
+    </html>
+  `;
+  
   return (
-    <div className="w-full h-full bg-white">
+    <div className="w-full h-full bg-stone-950">
       <iframe
         title="Code Preview"
-        srcDoc={`<html><head><script src="https://cdn.tailwindcss.com"></script></head><body class="p-4">${iframeBody}</body></html>`}
+        srcDoc={srcDoc}
         className="w-full h-full border-none"
-        sandbox="allow-scripts"
+        sandbox="allow-scripts allow-same-origin"
       />
     </div>
   );
@@ -216,10 +249,16 @@ function LearnPageLoading() {
   )
 }
 
-export default function LearnPage() {
+function LearnPage() {
   return (
+    // You can't use useSearchParams in a page that is statically rendered.
+    // So we wrap the view in a suspense boundary.
     <Suspense fallback={<LearnPageLoading />}>
       <LearnView />
     </Suspense>
   )
 }
+
+export default LearnPage;
+
+    
