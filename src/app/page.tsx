@@ -10,11 +10,14 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-6xl w-full">
           {/* Left Column: Text Content & CTA */}
           <div className="flex flex-col items-start text-left animate-in fade-in slide-in-from-left-8 duration-1000">
-            <h1 className="text-5xl md:text-6xl font-bold font-headline text-foreground mb-4">
-              Paper Street Soapbox
+            <h1 className="text-5xl md:text-6xl font-bold font-headline text-foreground">
+              Paper Street Co.
             </h1>
+            <h2 className="text-4xl md:text-5xl font-bold font-headline text-muted-foreground mb-4">
+              The Soapbox
+            </h2>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              The first rule of Soapbox is: you DO talk about Soapbox. Your journey into creation starts now.
+              The first rule of Soapbox is: you DO talk about Soapbox.
             </p>
             <Link href="/learn" passHref>
               <Button size="lg" className="text-lg py-7 px-8">
