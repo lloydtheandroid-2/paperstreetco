@@ -1,8 +1,9 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Bomb, Rocket, Wrench, Users, GitMerge } from 'lucide-react';
+import { Bomb, GitMerge, Users } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import LoginButton from '@/components/auth/login-button';
 
 export default function Home() {
   return (
@@ -25,40 +26,14 @@ export default function Home() {
       </header>
 
       <main className="flex flex-col items-center w-full max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
+        <div className="w-full md:w-1/3">
+           <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-accent"><Bomb />Project Mayhem</CardTitle>
-              <CardDescription>A space for the Rogue Android</CardDescription>
+              <CardDescription>somebody spoke, didn't they?</CardDescription>
             </CardHeader>
             <CardContent>
-              <Link href="/portfolio/project-mayhem" passHref>
-                <Button className="w-full">Enter this Soapbox</Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent"><Rocket />Space Monkeys</CardTitle>
-              <CardDescription>A space for Ground Control</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link href="/portfolio/space-monkeys" passHref>
-                <Button className="w-full">Enter this Soapbox</Button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent"><Wrench />Lou's Basement</CardTitle>
-              <CardDescription>A space for Double D</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link href="/portfolio/lous-basement" passHref>
-                <Button className="w-full">Enter this Soapbox</Button>
-              </Link>
+                <LoginButton />
             </CardContent>
           </Card>
         </div>

@@ -3,17 +3,12 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
+import UserNav from '@/components/auth/user-nav';
 
 const NavMenu = () => (
   <>
     <Link href="/portfolio/project-mayhem" passHref>
       <Button variant="ghost">Project Mayhem</Button>
-    </Link>
-    <Link href="/portfolio/space-monkeys" passHref>
-      <Button variant="ghost">Space Monkeys</Button>
-    </Link>
-    <Link href="/portfolio/lous-basement" passHref>
-      <Button variant="ghost">Lou's Basement</Button>
     </Link>
     <Link href="/blog" passHref>
       <Button variant="ghost">Blog</Button>
@@ -35,6 +30,7 @@ export default function Header() {
       {/* Desktop Menu */}
       <nav className="hidden md:flex items-center gap-4">
         <NavMenu />
+        <UserNav />
       </nav>
 
       {/* Mobile Menu */}
@@ -49,6 +45,7 @@ export default function Header() {
           <SheetContent side="right">
             <div className="flex flex-col gap-4 py-8">
               <NavMenu />
+              <UserNav />
             </div>
           </SheetContent>
         </Sheet>
