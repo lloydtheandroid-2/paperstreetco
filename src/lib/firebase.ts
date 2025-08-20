@@ -3,12 +3,12 @@ import { initializeApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  "projectId": "paper-street-soapbox",
+  "appId": "1:762380655759:web:a9c1855b0308b713b824fa",
+  "storageBucket": "paper-street-soapbox.firebasestorage.app",
+  "apiKey": "AIzaSyD1FGmC2Xquifxfzrm-a-lg7MsOZrhOtDk",
+  "authDomain": "paper-street-soapbox.firebaseapp.com",
+  "messagingSenderId": "762380655759"
 };
 
 
