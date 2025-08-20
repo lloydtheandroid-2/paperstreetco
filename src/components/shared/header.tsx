@@ -18,6 +18,9 @@ const NavMenu = () => (
     <Link href="/blog" passHref>
       <Button variant="ghost">Blog</Button>
     </Link>
+    <Link href="/roadmap" passHref>
+      <Button variant="ghost">Roadmap</Button>
+    </Link>
   </>
 );
 
@@ -25,7 +28,7 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between p-4 border-b">
       <Link href="/" className="flex items-center gap-2">
-        <Image src="/assets/logo.png" alt="Company Logo" width={48} height={48} />
+        <Image src="/assets/logo.png" alt="Company Logo" width={96} height={96} />
         <span className="font-bold text-lg">Paper Street Co.</span>
       </Link>
       
