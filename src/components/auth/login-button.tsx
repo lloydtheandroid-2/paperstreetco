@@ -13,10 +13,10 @@ export default function LoginButton() {
         try {
             await signInWithPopup(auth, provider);
         } catch (error: any) {
-            console.error('Error signing in with Google: ', error);
+            console.error('Error signing in with Google: ', error.code, error.message);
             toast({
                 title: 'Authentication Error',
-                description: `Failed to sign in. (Code: ${error.code})`,
+                description: `Failed to sign in. Please try again. (Code: ${error.code})`,
                 variant: 'destructive'
             })
         }
