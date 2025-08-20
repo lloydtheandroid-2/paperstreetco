@@ -11,7 +11,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useProgressStore } from '@/hooks/use-progress-store';
 import { useToast } from '@/hooks/use-toast';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 // A simple "preview" component that uses an iframe to render user HTML
 function CodePreview({ code }: { code: string }) {
@@ -38,21 +38,40 @@ function CodePreview({ code }: { code: string }) {
 
 export default function LearnPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { toast } = useToast();
   const { completedLessons, setCompletedLessons } = useProgressStore();
 
-  // Start at the lesson after the last completed one
-  const [currentLessonIndex, setCurrentLessonIndex] = React.useState(completedLessons.length);
+  const getInitialLessonIndex = () => {
+    const lessonParam = searchParams.get('lesson');
+    if (lessonParam) {
+      const lessonNum = parseInt(lessonParam, 10);
+      if (!isNaN(lessonNum) && lessonNum >= 0 && lessonNum < roadmapItems.length) {
+        return lessonNum;
+      }
+    }
+    // Start at the lesson after the last completed one by default
+    return completedLessons.length;
+  };
+
+  const [currentLessonIndex, setCurrentLessonIndex] = React.useState(getInitialLessonIndex);
   const lesson = roadmapItems[currentLessonIndex];
-  const [userCode, setUserCode] = React.useState(lesson.sampleCode || '');
+  const [userCode, setUserCode] = React.useState(lesson?.sampleCode || '');
 
   const isCompleted = completedLessons.includes(currentLessonIndex);
 
   React.useEffect(() => {
     if (roadmapItems[currentLessonIndex]) {
       setUserCode(roadmapItems[currentLessonIndex].sampleCode || '');
+      // Update URL without navigating
+      const newUrl = `${window.location.pathname}?lesson=${currentLessonIndex}`;
+      window.history.pushState({ path: newUrl }, '', newUrl);
     }
   }, [currentLessonIndex]);
+  
+  React.useEffect(() => {
+    setCurrentLessonIndex(getInitialLessonIndex());
+  }, [searchParams]);
 
   const handleNext = () => {
     if (currentLessonIndex < roadmapItems.length - 1) {
@@ -88,7 +107,7 @@ export default function LearnPage() {
   };
 
   if (!lesson) {
-    // This can happen if all lessons are completed
+    // This can happen if all lessons are completed, or invalid query param
     React.useEffect(() => {
       router.push('/dashboard');
     }, [router]);
@@ -142,10 +161,18 @@ export default function LearnPage() {
                         <div className="text-sm text-muted-foreground">
                             Rule {currentLessonIndex + 1} of {roadmapItems.length}
                         </div>
-                        <Button onClick={handleComplete}>
-                            {isCompleted ? 'Completed' : 'Mark as Complete'}
-                            <Check className={`ml-2 ${isCompleted ? 'opacity-100' : 'opacity-50'}`} />
-                        </Button>
+                        <div className="flex items-center gap-2">
+                          <Button onClick={handleComplete} variant={isCompleted ? "secondary" : "default"}>
+                              {isCompleted ? 'Completed' : 'Mark as Complete'}
+                              <Check className={`ml-2 ${isCompleted ? 'opacity-100' : 'opacity-50'}`} />
+                          </Button>
+                           {currentLessonIndex < roadmapItems.length - 1 && (
+                            <Button onClick={handleNext} variant="outline">
+                                Next
+                                <ChevronRight />
+                            </Button>
+                           )}
+                        </div>
                     </div>
                 </div>
             </ScrollArea>
