@@ -74,7 +74,9 @@ export default function DashboardPage() {
               <CheckCircle className="w-6 h-6" />
               <CardTitle className="text-2xl">Last Accomplishment</CardTitle>
             </div>
-            <CardDescription>You've already proven yourself here.</CardDescription>
+            <CardDescription>
+              {lastCompletedLesson ? "You've already proven yourself here." : "A blank slate is a world of opportunity."}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             {lastCompletedLesson ? (
