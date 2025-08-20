@@ -82,7 +82,7 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Link href="/roadmap" passHref>
-                <Button variant="secondary" className="w-full">View the Path</Button>
+                <Button variant="secondary" className="w-full">Embrace the Unknown</Button>
               </Link>
             </CardContent>
           </Card>
