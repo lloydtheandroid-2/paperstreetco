@@ -15,7 +15,7 @@ export async function generateCode(prompt: GenerateCodeInput): Promise<GenerateC
 
 const generationPrompt = ai.definePrompt({
   name: 'generateCodePrompt',
-  input: { schema: GenerateCodeInputSchema },
+  input: { schema: z.object({ prompt: GenerateCodeInputSchema }) },
   output: { schema: GenerateCodeOutputSchema },
   prompt: `
     You are an expert web developer who specializes in creating simple, single-file web applications.
@@ -40,7 +40,7 @@ const generateCodeFlow = ai.defineFlow(
     outputSchema: GenerateCodeOutputSchema,
   },
   async (prompt) => {
-    const { output } = await generationPrompt(prompt);
+    const { output } = await generationPrompt({ prompt });
     return output!;
   }
 );
