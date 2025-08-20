@@ -4,11 +4,11 @@ import { getAuth, type Auth } from 'firebase/auth';
 // IMPORTANT: You must replace these placeholder values with the actual values from your Firebase project's console.
 const firebaseConfig = {
   "projectId": "the-soapbox-d4c6q",
-  "appId": "REPLACE_WITH_YOUR_APP_ID",
-  "storageBucket": "the-soapbox-d4c6q.appspot.com",
-  "apiKey": "REPLACE_WITH_YOUR_API_KEY",
+  "appId": "1:386326789588:web:4e7b2ce73e4453806d6a41",
+  "storageBucket": "the-soapbox-d4c6q.firebasestorage.app",
+  "apiKey": "AIzaSyC7A5NooTFhxkv-M-yXfHcdMaZtUMj-Am0",
   "authDomain": "the-soapbox-d4c6q.firebaseapp.com",
-  "messagingSenderId": "REPLACE_WITH_YOUR_MESSAGING_SENDER_ID"
+  "messagingSenderId": "386326789588"
 };
 
 function getFirebaseApp(): FirebaseApp {
