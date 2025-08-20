@@ -1,13 +1,10 @@
-
-import { Code, Database, BrainCircuit, ShieldCheck, Shirt, Users, Goal, Network, Building, Layers, Binary, ToyBrick, Waypoints, Workflow, Blocks, FunctionSquare, Pilcrow } from "lucide-react";
-
 export const roadmapItems = [
   // Milestone 0: First Principles (Coding Fundamentals)
   {
     title: "Rule #0: First Principles",
     subtitle: "What is Code?",
     description: "Understand what programming is and how humans use it to give instructions to computers. It's a language, a tool, and a craft.",
-    icon: <Binary className="w-8 h-8 text-accent" />,
+    icon: "Binary",
     technologies: ["Conceptual"],
     hidePreview: true,
     sampleCode: {
@@ -23,7 +20,7 @@ print("This message would appear in a Python terminal.")`
     title: "Rule #0: First Principles",
     subtitle: "Variables: The Building Blocks",
     description: "Learn how to store and label information using variables. Think of them as boxes you can put data into.",
-    icon: <ToyBrick className="w-8 h-8 text-accent" />,
+    icon: "ToyBrick",
     technologies: ["Variables", "Data Types"],
     sampleCode: {
       "JavaScript": `// Try changing the values and see the output change!
@@ -40,7 +37,7 @@ my_age = 30 # A variable 'my_age' storing a number
     title: "Rule #0: First Principles",
     subtitle: "Functions: Reusable Instructions",
     description: "Bundle up your code into reusable blocks called functions. Write it once, use it forever.",
-    icon: <FunctionSquare className="w-8 h-8 text-accent" />,
+    icon: "FunctionSquare",
     technologies: ["Functions"],
     sampleCode: {
       "JavaScript": `function greet(name) {
@@ -62,7 +59,7 @@ print(message)`
     title: "Rule #0: First Principles",
     subtitle: "Conditionals: Making Decisions",
     description: "Teach your program how to make choices using 'if' and 'else' statements, allowing it to react differently to different situations.",
-    icon: <Waypoints className="w-8 h-8 text-accent" />,
+    icon: "Waypoints",
     technologies: ["Conditionals", "Logic"],
     sampleCode: {
       "JavaScript": `let memberCount = 8;
@@ -84,7 +81,7 @@ else:
     title: "Rule #0: First Principles",
     subtitle: "Objects: Organizing Your Data",
     description: "Learn to group related variables together into a single structure called an object, just like a file folder for your data.",
-    icon: <Blocks className="w-8 h-8 text-accent" />,
+    icon: "Blocks",
     technologies: ["Objects", "Data Structures"],
     sampleCode: {
       "JavaScript": `let user = {
@@ -109,7 +106,7 @@ print(user["name"])`
     title: "Rule #1: The First Whisper",
     subtitle: "What is HTML?",
     description: "Learn the skeleton of the web. Understand tags, elements, and the basic structure of a web page.",
-    icon: <Code className="w-8 h-8 text-accent" />,
+    icon: "Code",
     technologies: ["HTML5"],
     sampleCode: {
       "JavaScript": `<!-- This is HTML. It describes the content of a page. -->
@@ -124,7 +121,7 @@ print(user["name"])`
     title: "Rule #1: The First Whisper",
     subtitle: "Styling with CSS",
     description: "Give your HTML some style. Learn about selectors, properties, and how to make things look good with Cascading Style Sheets.",
-    icon: <Code className="w-8 h-8 text-accent" />,
+    icon: "Code",
     technologies: ["CSS3"],
     sampleCode: {
       "JavaScript": `<!-- CSS is embedded in a <style> tag or a separate file. -->
@@ -147,7 +144,7 @@ print(user["name"])`
     title: "Rule #1: The First Whisper",
     subtitle: "Introduction to JavaScript",
     description: "Add interactivity to your site. Learn about variables, data types, and how to manipulate the web page with JavaScript.",
-    icon: <Code className="w-8 h-8 text-accent" />,
+    icon: "Code",
     technologies: ["JavaScript"],
     sampleCode: {
       "JavaScript": `<h1 id="title">Welcome!</h1>
@@ -165,7 +162,7 @@ print(user["name"])`
     title: "Rule #1: The First Whisper",
     subtitle: "Your First Component with React",
     description: "Start thinking in components. Learn the basics of React and how it helps build complex UIs.",
-    icon: <Layers className="w-8 h-8 text-accent" />,
+    icon: "Layers",
     technologies: ["React"],
     hidePreview: true,
     sampleCode: {
@@ -188,7 +185,7 @@ function MyButton() {
     title: "Rule #2: Going Rogue",
     subtitle: "Setting up a Next.js Project",
     description: "Move from a single file to a full project structure with the most popular React framework.",
-    icon: <Building className="w-8 h-8 text-accent" />,
+    icon: "Building",
     technologies: ["Next.js", "npm"],
     hidePreview: true,
     sampleCode: {
@@ -202,7 +199,7 @@ npx create-next-app@latest`,
     title: "Rule #2: Going Rogue",
     subtitle: "Styling with Tailwind CSS",
     description: "Utility-first CSS is a game changer. Learn to build beautiful designs directly in your markup.",
-    icon: <Building className="w-8 h-8 text-accent" />,
+    icon: "Building",
     technologies: ["Tailwind CSS"],
     sampleCode: {
       "JavaScript": `<!-- With Tailwind, you add classes to style elements -->
@@ -219,7 +216,7 @@ npx create-next-app@latest`,
     title: "Rule #2: Going Rogue",
     subtitle: "State Management with Hooks",
     description: "Manage dynamic data within your components using React's built-in \`useState\` and \`useEffect\` hooks.",
-    icon: <Building className="w-8 h-8 text-accent" />,
+    icon: "Building",
     technologies: ["React Hooks"],
     hidePreview: true,
     sampleCode: {
@@ -242,7 +239,7 @@ function Counter() {
     title: "Rule #2: Going Rogue",
     subtitle: "Client-Side Routing",
     description: "Create a multi-page feel in a single-page application using Next.js's App Router.",
-    icon: <Building className="w-8 h-8 text-accent" />,
+    icon: "Building",
     technologies: ["Next.js Router"],
     hidePreview: true,
     sampleCode: {
@@ -266,7 +263,7 @@ function Nav() {
     title: "Rule #3: Graceful Exits",
     subtitle: "What is a Server?",
     description: "Understand the role of a server and how it responds to requests from a browser. Create a simple one with Node.js.",
-    icon: <Network className="w-8 h-8 text-accent" />,
+    icon: "Network",
     technologies: ["Node.js", "HTTP"],
     hidePreview: true,
     sampleCode: {
@@ -299,7 +296,7 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
     title: "Rule #3: Graceful Exits",
     subtitle: "Building a REST API with Express",
     description: "Create structured API endpoints to handle data requests from your frontend.",
-    icon: <Network className="w-8 h-8 text-accent" />,
+    icon: "Network",
     technologies: ["Express", "REST APIs"],
     hidePreview: true,
     sampleCode: {
@@ -326,7 +323,7 @@ def get_users():
     title: "Rule #3: Graceful Exits",
     subtitle: "Understanding Server Components",
     description: "Learn how Next.js allows you to run React components on the server to fetch data and improve performance.",
-    icon: <Network className="w-8 h-8 text-accent" />,
+    icon: "Network",
     technologies: ["Server Components"],
     hidePreview: true,
     sampleCode: {
@@ -347,7 +344,7 @@ async function MyServerComponent() {
     title: "Rule #4: You vs. The Machine",
     subtitle: "Introduction to Databases",
     description: "Learn why you need a database and the difference between SQL and NoSQL.",
-    icon: <Database className="w-8 h-8 text-accent" />,
+    icon: "Database",
     technologies: ["Databases"],
     hidePreview: true,
     sampleCode: {
@@ -363,7 +360,7 @@ db.collection('users').find({ name: 'Marla' });`,
     title: "Rule #4: You vs. The Machine",
     subtitle: "Connecting to Firebase Firestore",
     description: "Set up and connect your application to a scalable, real-time NoSQL database from Google.",
-    icon: <Database className="w-8 h-8 text-accent" />,
+    icon: "Database",
     technologies: ["Firebase Firestore"],
     hidePreview: true,
     sampleCode: {
@@ -387,7 +384,7 @@ db = firestore.client()`
     title: "Rule #4: You vs. The Machine",
     subtitle: "Writing and Reading Data",
     description: "Perform basic Create, Read, Update, and Delete (CRUD) operations on your Firestore database.",
-    icon: <Database className="w-8 h-8 text-accent" />,
+    icon: "Database",
     technologies: ["Firebase Firestore"],
     hidePreview: true,
     sampleCode: {
@@ -415,7 +412,7 @@ def add_user(name):
     title: "Rule #5: One Fight at a Time",
     subtitle: "What is Genkit?",
     description: "Meet the portable, open-source framework for building production-ready AI-powered features.",
-    icon: <BrainCircuit className="w-8 h-8 text-accent" />,
+    icon: "BrainCircuit",
     technologies: ["Genkit"],
     hidePreview: true,
     sampleCode: {
@@ -434,7 +431,7 @@ configureGenkit({
     title: "Rule #5: One Fight at a Time",
     subtitle: "Your First Generative AI Flow",
     description: "Create a simple Genkit flow that calls an LLM to generate text from a prompt.",
-    icon: <BrainCircuit className="w-8 h-8 text-accent" />,
+    icon: "BrainCircuit",
     technologies: ["Genkit", "LLMs"],
     hidePreview: true,
     sampleCode: {
@@ -457,7 +454,7 @@ export const menuSuggestionFlow = defineFlow(
     title: "Rule #5: One Fight at a Time",
     subtitle: "Structured Output with Zod",
     description: "Force the AI to return clean, predictable JSON data by defining an output schema with Zod.",
-    icon: <BrainCircuit className="w-8 h-8 text-accent" />,
+    icon: "BrainCircuit",
     technologies: ["Genkit", "Zod"],
     hidePreview: true,
     sampleCode: {
@@ -477,7 +474,7 @@ const recipeSchema = z.object({
     title: "Rule #5: One Fight at a Time",
     subtitle: "Connecting AI to your UI",
     description: "Call your Genkit flow from a React component and display the results to the user.",
-    icon: <BrainCircuit className="w-8 h-8 text-accent" />,
+    icon: "BrainCircuit",
     hidePreview: true,
     sampleCode: {
       "JavaScript": `// In a React component:
@@ -502,7 +499,7 @@ async function MyComponent() {
     title: "Rule #6: No Shirts, No Shoes",
     subtitle: "What is Containerization?",
     description: "Understand how Docker containers package your application and its dependencies to run anywhere.",
-    icon: <Shirt className="w-8 h-8 text-accent" />,
+    icon: "Shirt",
     technologies: ["Docker"],
     hidePreview: true,
     sampleCode: {
@@ -526,7 +523,7 @@ CMD ["python", "app.py"]`
     title: "Rule #6: No Shirts, No Shoes",
     subtitle: "Deploying to Firebase Hosting",
     description: "Push your Next.js application to the web with a single command using Firebase Hosting.",
-    icon: <Shirt className="w-8 h-8 text-accent" />,
+    icon: "Shirt",
     technologies: ["Firebase Hosting", "CI/CD"],
     hidePreview: true,
     sampleCode: {
@@ -542,7 +539,7 @@ firebase deploy --only hosting`,
     title: "Rule #7: The Long Haul",
     subtitle: "Firebase Authentication",
     description: "Add a complete authentication system to your app to manage users.",
-    icon: <ShieldCheck className="w-8 h-8 text-accent" />,
+    icon: "ShieldCheck",
     technologies: ["Authentication", "Firebase Auth"],
     hidePreview: true,
     sampleCode: {
@@ -562,7 +559,7 @@ print(f'Successfully fetched user data: {user.uid}')`
     title: "Rule #7: The Long Haul",
     subtitle: "Firestore Security Rules",
     description: "Protect your data by defining who can read, write, and update documents in your database.",
-    icon: <ShieldCheck className="w-8 h-8 text-accent" />,
+    icon: "ShieldCheck",
     technologies: ["Security Rules", "Firebase"],
     hidePreview: true,
     sampleCode: {
@@ -583,7 +580,7 @@ service cloud.firestore {
     title: "Rule #7: The Long Haul",
     subtitle: "Input Validation",
     description: "Never trust user input. Learn to validate and sanitize data on the server to prevent attacks.",
-    icon: <ShieldCheck className="w-8 h-8 text-accent" />,
+    icon: "ShieldCheck",
     technologies: ["Security"],
     hidePreview: true,
     sampleCode: {
@@ -610,7 +607,7 @@ def update_user():
     title: "Rule #8: If It's Your First Night, You Have to Fight",
     subtitle: "Your First Real Project",
     description: "You have the tools. It's time to build something from scratch. No more tutorials. You have to fight.",
-    icon: <Goal className="w-8 h-8 text-accent" />,
+    icon: "Goal",
     technologies: ["Project Scoping", "Problem Solving", "Git"],
     hidePreview: true,
     sampleCode: {

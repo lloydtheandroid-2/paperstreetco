@@ -11,6 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { roadmapItems } from '@/lib/roadmap-data';
+import { RoadmapIcon } from '@/components/shared/roadmap-icon';
 
 function TrainingResourcesDialog({ technologies, children, title }: { technologies: string[], children: React.ReactNode, title: string }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -97,7 +98,9 @@ export default function RoadmapPage() {
                    <Card className="cursor-pointer hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
                     <CardHeader>
                       <div className={`flex items-center gap-4 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                        <div className="flex-shrink-0">{item.icon}</div>
+                        <div className="flex-shrink-0">
+                          <RoadmapIcon icon={item.icon} />
+                        </div>
                         <div>
                           <p className="text-sm text-muted-foreground">{item.title}</p>
                           <CardTitle>{item.subtitle}</CardTitle>
