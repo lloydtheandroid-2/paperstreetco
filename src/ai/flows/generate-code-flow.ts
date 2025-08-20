@@ -7,6 +7,7 @@
  */
 
 import {ai} from '@/ai/genkit';
+import {z} from 'genkit';
 import { GenerateCodeInput, GenerateCodeInputSchema, GenerateCodeOutput, GenerateCodeOutputSchema } from './schemas';
 
 export async function generateCode(prompt: GenerateCodeInput): Promise<GenerateCodeOutput> {
@@ -40,7 +41,7 @@ const generateCodeFlow = ai.defineFlow(
     outputSchema: GenerateCodeOutputSchema,
   },
   async (prompt) => {
-    const { output } = await generationPrompt({ prompt });
+    const { output } = await generationPrompt({ prompt: { prompt } });
     return output!;
   }
 );
