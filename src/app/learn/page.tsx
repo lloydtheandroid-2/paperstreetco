@@ -9,7 +9,7 @@ import { roadmapItems } from '@/lib/roadmap-data';
 import { Code, Eye, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useProgressStore } from '../dashboard/page';
+import { useProgressStore } from '@/hooks/use-progress-store';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 
@@ -39,7 +39,7 @@ function CodePreview({ code }: { code: string }) {
 export default function LearnPage() {
   const router = useRouter();
   const { toast } = useToast();
-  const [completedLessons, setCompletedLessons] = useProgressStore();
+  const { completedLessons, setCompletedLessons } = useProgressStore();
 
   // Start at the lesson after the last completed one
   const [currentLessonIndex, setCurrentLessonIndex] = React.useState(completedLessons.length);
@@ -49,7 +49,9 @@ export default function LearnPage() {
   const isCompleted = completedLessons.includes(currentLessonIndex);
 
   React.useEffect(() => {
-    setUserCode(roadmapItems[currentLessonIndex].sampleCode || '');
+    if (roadmapItems[currentLessonIndex]) {
+      setUserCode(roadmapItems[currentLessonIndex].sampleCode || '');
+    }
   }, [currentLessonIndex]);
 
   const handleNext = () => {
@@ -66,7 +68,7 @@ export default function LearnPage() {
 
   const handleComplete = () => {
     if (!isCompleted) {
-        setCompletedLessons(prev => [...new Set([...prev, currentLessonIndex])].sort((a,b) => a-b));
+        setCompletedLessons([...new Set([...completedLessons, currentLessonIndex])].sort((a,b) => a-b));
         toast({
             title: "Rule Mastered!",
             description: `You've completed: "${lesson.subtitle}"`,
@@ -84,6 +86,14 @@ export default function LearnPage() {
         handleNext();
     }
   };
+
+  if (!lesson) {
+    // This can happen if all lessons are completed
+    React.useEffect(() => {
+      router.push('/dashboard');
+    }, [router]);
+    return null;
+  }
 
   return (
     <div className="h-[calc(100vh-theme(spacing.16))]">

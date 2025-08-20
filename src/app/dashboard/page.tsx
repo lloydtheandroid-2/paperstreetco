@@ -10,16 +10,16 @@ import Link from 'next/link';
 import { ChevronRight, CheckCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '@/components/auth/auth-provider';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useProgressStore } from './page';
+import { useProgressStore } from '@/hooks/use-progress-store';
 
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
-  const [completedLessons] = useProgressStore();
+  const { completedLessons } = useProgressStore();
   
   const completedCount = completedLessons.length;
   const totalLessons = roadmapItems.length;
-  const progressPercentage = (completedCount / totalLessons) * 100;
+  const progressPercentage = totalLessons > 0 ? (completedCount / totalLessons) * 100 : 0;
   
   const lastCompletedLesson = completedCount > 0 ? roadmapItems[completedCount - 1] : null;
   const nextLesson = completedCount < totalLessons ? roadmapItems[completedCount] : null;
@@ -83,7 +83,10 @@ export default function DashboardPage() {
                 <p className="text-muted-foreground mt-1">{lastCompletedLesson.description}</p>
               </div>
             ) : (
-              <p className="text-muted-foreground">Your first fight awaits. It's only after you've lost everything that you're free to do anything.</p>
+              <div>
+                <h3 className="font-bold text-lg">Your First Fight Awaits</h3>
+                <p className="text-muted-foreground mt-1">It's only after you've lost everything that you're free to do anything. Your journey starts now.</p>
+              </div>
             )}
           </CardContent>
         </Card>
