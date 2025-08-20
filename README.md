@@ -32,6 +32,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 - [Node.js](https://nodejs.org/) (v18 or newer recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Firebase CLI](https://firebase.google.com/docs/cli)
 
 ### Installation Steps
 
@@ -46,12 +47,17 @@ Follow these instructions to get a copy of the project up and running on your lo
     npm install
     ```
 
-3.  **Run the development server:**
+3.  **Run the development environment:**
+    In one terminal, start the Firebase Emulators:
+    ```bash
+    npm run firebase:emulators
+    ```
+    In a second terminal, start the Next.js development server:
     ```bash
     npm run dev
     ```
 
-Open [http://localhost:9002](http://localhost:9002) with your browser to see the result.
+Open [http://localhost:9002](http://localhost:9002) with your browser to see the result. The Emulator UI will be available at [http://localhost:4000](http://localhost:4000).
 
 ## Available Scripts
 
@@ -62,3 +68,4 @@ In the project directory, you can run:
 - `npm run start`: Starts a production server.
 - `npm run lint`: Runs the linter to check for code quality issues.
 - `npm run genkit:dev`: Starts the Genkit development server.
+- `npm run firebase:emulators`: Starts the Firebase Auth emulator.

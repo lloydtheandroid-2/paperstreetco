@@ -1,7 +1,6 @@
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
-import { getAuth, type Auth } from 'firebase/auth';
+import { getAuth, type Auth, connectAuthEmulator } from 'firebase/auth';
 
-// IMPORTANT: You must replace these placeholder values with the actual values from your Firebase project's console.
 const firebaseConfig = {
   "projectId": "the-soapbox-d4c6q",
   "appId": "1:386326789588:web:4e7b2ce73e4453806d6a41",
@@ -18,10 +17,12 @@ function initializeFirebaseApp(): FirebaseApp {
   return initializeApp(firebaseConfig);
 }
 
-export const app: FirebaseApp = initializeFirebaseApp();
-export const auth: Auth = getAuth(app);
+const app: FirebaseApp = initializeFirebaseApp();
+const auth: Auth = getAuth(app);
 
-// This function is now deprecated but kept for compatibility in case it's used elsewhere.
-export function getFirebaseAuth(): Auth {
-    return auth;
+// Connect to Auth Emulator in development
+if (process.env.NODE_ENV === 'development') {
+  connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
 }
+
+export { app, auth };
