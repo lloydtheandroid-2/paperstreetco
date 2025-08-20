@@ -18,13 +18,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from './auth-provider';
 import { getFirebaseAuth } from '@/lib/firebase';
+import Link from 'next/link';
 
 export default function UserNav() {
   const { user, loading } = useAuth();
-  const auth = getFirebaseAuth();
-
+  
   const handleLogout = () => {
-    auth.signOut();
+    getFirebaseAuth().signOut();
   };
   
   if (loading) {

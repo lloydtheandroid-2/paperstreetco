@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Bomb, GitMerge, Users } from 'lucide-react';
+import { Bomb, GitMerge, Users, School } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -35,14 +35,25 @@ export default function Home() {
             </CardHeader>
             <CardContent>
                 <Link href="/dashboard" passHref>
-                  <Button className="w-full">Let's make some Soap</Button>
+                  <Button className="w-full">Enter Dashboard</Button>
                 </Link>
             </CardContent>
           </Card>
         </div>
 
-        <div className="mt-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:w-2/3">
+        <div className="mt-8 w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:w-full">
            <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><School />Learning Path</CardTitle>
+              <CardDescription>Start your journey.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link href="/learn" passHref>
+                <Button variant="secondary" className="w-full">Begin Lesson 1</Button>
+              </Link>
+            </CardContent>
+          </Card>
+          <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-2"><Users />Support Group</CardTitle>
               <CardDescription>A place to let it all out.</CardDescription>
