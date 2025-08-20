@@ -1,7 +1,64 @@
 
-import { Code, Database, BrainCircuit, ShieldCheck, Shirt, Users, Goal, Network, Building, Layers } from "lucide-react";
+import { Code, Database, BrainCircuit, ShieldCheck, Shirt, Users, Goal, Network, Building, Layers, Binary, ToyBrick, Waypoints, Workflow, Blocks, FunctionSquare, Pilcrow } from "lucide-react";
 
 export const roadmapItems = [
+  // Milestone 0: First Principles (Coding Fundamentals)
+  {
+    title: "Rule #0: First Principles",
+    subtitle: "What is Code?",
+    description: "Understand what programming is and how humans use it to give instructions to computers. It's a language, a tool, and a craft.",
+    icon: <Binary className="w-8 h-8 text-accent" />,
+    technologies: ["Conceptual"],
+    sampleCode: `// This is a comment. It's text for humans, ignored by the computer.
+// Code is just a set of instructions, like a recipe.`
+  },
+  {
+    title: "Rule #0: First Principles",
+    subtitle: "Variables: The Building Blocks",
+    description: "Learn how to store and label information using variables. Think of them as boxes you can put data into.",
+    icon: <ToyBrick className="w-8 h-8 text-accent" />,
+    technologies: ["Variables", "Data Types"],
+    sampleCode: `let myName = "Tyler"; // A variable 'myName' storing text
+let myAge = 30; // A variable 'myAge' storing a number`
+  },
+  {
+    title: "Rule #0: First Principles",
+    subtitle: "Functions: Reusable Instructions",
+    description: "Bundle up your code into reusable blocks called functions. Write it once, use it forever.",
+    icon: <FunctionSquare className="w-8 h-8 text-accent" />,
+    technologies: ["Functions"],
+    sampleCode: `function greet() {
+  return "Welcome to the Soapbox.";
+}
+
+// Call the function to get the greeting:
+greet();`
+  },
+  {
+    title: "Rule #0: First Principles",
+    subtitle: "Conditionals: Making Decisions",
+    description: "Teach your program how to make choices using 'if' and 'else' statements, allowing it to react differently to different situations.",
+    icon: <Waypoints className="w-8 h-8 text-accent" />,
+    technologies: ["Conditionals", "Logic"],
+    sampleCode: `let memberCount = 8;
+
+if (memberCount > 7) {
+  // The first rule is...
+}`
+  },
+  {
+    title: "Rule #0: First Principles",
+    subtitle: "Objects: Organizing Your Data",
+    description: "Learn to group related variables together into a single structure called an object, just like a file folder for your data.",
+    icon: <Blocks className="w-8 h-8 text-accent" />,
+    technologies: ["Objects", "Data Structures"],
+    sampleCode: `let user = {
+  name: "Marla Singer",
+  hasAttended: true,
+  meetings: 12
+};`
+  },
+
   // Milestone 1: The First Whisper (Web Fundamentals)
   {
     title: "Rule #1: The First Whisper",
@@ -157,7 +214,7 @@ const db = getFirestore(app);`
 });`
   },
 
-  // Milestone 5: One Fight at a Time (AI Integration)
+  // Milestone 5: One Fight at aTime (AI Integration)
   {
     title: "Rule #5: One Fight at a Time",
     subtitle: "What is Genkit?",
