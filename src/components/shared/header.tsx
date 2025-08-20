@@ -1,23 +1,30 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
+import { Menu, Bomb, Rocket, Wrench } from 'lucide-react';
 import UserNav from '@/components/auth/user-nav';
+import { useAuth } from '@/components/auth/auth-provider';
 
-const NavMenu = () => (
+const NavMenu = () => {
+  const { user } = useAuth();
+  
+  return (
   <>
-    <Link href="/portfolio/project-mayhem" passHref>
-      <Button variant="ghost">Project Mayhem</Button>
-    </Link>
+    {user && (
+       <Link href="/dashboard" passHref>
+        <Button variant="ghost">Dashboard</Button>
+      </Link>
+    )}
     <Link href="/blog" passHref>
-      <Button variant="ghost">Blog</Button>
+      <Button variant="ghost">Support Group</Button>
     </Link>
     <Link href="/roadmap" passHref>
       <Button variant="ghost">Roadmap</Button>
     </Link>
   </>
-);
+)};
 
 export default function Header() {
   return (

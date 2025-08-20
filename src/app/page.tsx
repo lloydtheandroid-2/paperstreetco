@@ -1,11 +1,14 @@
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Bomb, GitMerge, Users } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import LoginButton from '@/components/auth/login-button';
+import { useAuth } from '@/components/auth/auth-provider';
 
 export default function Home() {
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-background">
       <header className="flex flex-col items-center text-center mb-12 animate-in fade-in duration-1000">
@@ -41,7 +44,7 @@ export default function Home() {
         <div className="mt-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:w-2/3">
            <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Users />Support Groups</CardTitle>
+              <CardTitle className="flex items-center gap-2"><Users />Support Group</CardTitle>
               <CardDescription>A place to let it all out.</CardDescription>
             </CardHeader>
             <CardContent>
