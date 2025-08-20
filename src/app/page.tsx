@@ -10,13 +10,6 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-6xl w-full">
           {/* Left Column: Text Content & CTA */}
           <div className="flex flex-col items-start text-left animate-in fade-in slide-in-from-left-8 duration-1000">
-            <Image
-              src="/assets/logo.png"
-              alt="Company Logo"
-              width={128}
-              height={128}
-              className="mb-6"
-            />
             <h1 className="text-5xl md:text-6xl font-bold font-headline text-foreground mb-4">
               Paper Street Soapbox
             </h1>
@@ -33,12 +26,11 @@ export default function Home() {
           {/* Right Column: Visual Element */}
           <div className="hidden md:flex justify-center items-center animate-in fade-in slide-in-from-right-8 duration-1000">
             <Image
-              src="https://placehold.co/600x800.png"
-              alt="Soap making process"
+              src="/assets/logo.png"
+              alt="Paper Street Soapbox Logo"
               width={500}
-              height={700}
+              height={500}
               className="rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300"
-              data-ai-hint="artisan soap"
             />
           </div>
         </div>
