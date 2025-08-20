@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Bomb, Rocket, Wrench, Users, GitMerge } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
           <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent">Project Mayhem</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-accent"><Bomb />Project Mayhem</CardTitle>
               <CardDescription>A space for the Rogue Android</CardDescription>
             </CardHeader>
             <CardContent>
@@ -39,7 +40,7 @@ export default function Home() {
 
           <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent">Space Monkeys</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-accent"><Rocket />Space Monkeys</CardTitle>
               <CardDescription>A space for Ground Control</CardDescription>
             </CardHeader>
             <CardContent>
@@ -51,7 +52,7 @@ export default function Home() {
 
           <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-primary transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent">Lou's Basement</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-accent"><Wrench />Lou's Basement</CardTitle>
               <CardDescription>A space for Double D</CardDescription>
             </CardHeader>
             <CardContent>
@@ -65,7 +66,7 @@ export default function Home() {
         <div className="mt-8 w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:w-2/3">
            <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">Support Groups</CardTitle>
+              <CardTitle className="flex items-center gap-2"><Users />Support Groups</CardTitle>
               <CardDescription>A place to let it all out.</CardDescription>
             </CardHeader>
             <CardContent>
@@ -76,7 +77,7 @@ export default function Home() {
           </Card>
           <Card className="bg-card/20 backdrop-blur-sm border-white/10 hover:bg-card/50 hover:border-accent transition-all duration-300 transform hover:-translate-y-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">Project Roadmap</CardTitle>
+              <CardTitle className="flex items-center gap-2"><GitMerge />Project Roadmap</CardTitle>
               <CardDescription>Let go of the wheel.</CardDescription>
             </CardHeader>
             <CardContent>
